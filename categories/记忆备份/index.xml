@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>记忆备份 on Matrix</title>
+    <link>https://sineatos.github.io/categories/%E8%AE%B0%E5%BF%86%E5%A4%87%E4%BB%BD/</link>
+    <description>Recent content in 记忆备份 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 29 May 2018 21:17:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/categories/%E8%AE%B0%E5%BF%86%E5%A4%87%E4%BB%BD/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>这个博客的“第一篇”文章</title>
+      <link>https://sineatos.github.io/life/first-article-in-this-blog/</link>
+      <pubDate>Tue, 29 May 2018 21:17:42 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/life/first-article-in-this-blog/</guid>
+      <description>这是这个博客实际意义上的第一篇文章，为什么说是实际意义？ 因为在发表这一篇文章之前，我还发了另一篇文章旧博客的地址(实际上也可以把那一篇文章当做是第零篇文章，哈哈)。
+说一下为什么要做这个博客。 实际上这已经不是我第一次写博客，在做这个博客之前，如前一篇文章所说，我还有一个旧博客。 旧博客是在我大一的时候在某位师兄(ZGL师兄)的建议下开始写的，主要的目的是写一下自己打ACM时做题的题解，作为记录和分享。 后来大三上学期开学前就没有打了，博客的更新也慢了下来，后来渐渐停了，跟GL师兄的联系也断了。 那回到正题，为什么会重新写博客呢？ - 首先，我觉得作为一个计算机专业的学生，学会了某个算法或者某项技术不拿出来分享，并不是一件明智的事，交流分享还是非常重要的。 - 其次，我平常很少跟人交流，如果不去练习怎么表达自己的想法，那哪怕我有一个很棒的想法其他人也不一定能理解。 - 再者，这些年下来，虽然我的积累并不算特别多，但还是有一点。我希望在我这些积累还没有过时之前拿出来分享，另一方面放在网上也方便自己查阅。虽然说是积累，但是更多的是在学习的过程中整理了其他人的文章中的对我自己有用的点，以方便自己查阅，现在分享出来，我也尽量会在文中标明自己是在哪里转载的。</description>
+    </item>
+    
+    <item>
+      <title>旧博客的地址</title>
+      <link>https://sineatos.github.io/life/the-old-blog-address/</link>
+      <pubDate>Mon, 28 May 2018 21:08:02 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/life/the-old-blog-address/</guid>
+      <description>http://www.cnblogs.com/sineatos
+里面主要记录了我大一到大三的做过的一些事 :)</description>
+    </item>
+    
+  </channel>
+</rss>
