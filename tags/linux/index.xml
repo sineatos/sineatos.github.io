@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Matrix</title>
+    <link>https://sineatos.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 01:20:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tmux 命令 快捷键</title>
+      <link>https://sineatos.github.io/tech/tools/develop-tools/tmux/tmux-shortcut/</link>
+      <pubDate>Wed, 30 May 2018 01:20:14 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop-tools/tmux/tmux-shortcut/</guid>
+      <description>参考: http://blog.csdn.net/u014015972/article/details/51611817 命令 tmux new -s myname 可以指定Session名 [PREFIX-:] new -s 在tmux中创建一个会话 tmux attach-session -t myname 重新连接此会话 tmux attach tmux attach -t basic 重新连接basic这个会话 tmux a -t</description>
+    </item>
+    
+    <item>
+      <title>Tmux 速成教程:技巧和调整</title>
+      <link>https://sineatos.github.io/tech/tools/develop-tools/tmux/tmux-tutorial/</link>
+      <pubDate>Wed, 30 May 2018 01:00:40 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop-tools/tmux/tmux-tutorial/</guid>
+      <description>基础知识 Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常</description>
+    </item>
+    
+  </channel>
+</rss>

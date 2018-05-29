@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>服务器 on Matrix</title>
+    <link>https://sineatos.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <description>Recent content in 服务器 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 01:37:44 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jupyter远程访问设置</title>
+      <link>https://sineatos.github.io/tech/tools/develop-tools/jupyter/jupyter-remote-visit/</link>
+      <pubDate>Wed, 30 May 2018 01:37:44 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop-tools/jupyter/jupyter-remote-visit/</guid>
+      <description>1. 登录远程服务器 2. 生成配置文件 jupyter notebook --generate-config 3. 生成密码 打开ipython 进行以下操作: In [1]: from notebook.auth import passwd In [2]: passwd() Enter password: Verify password: Out[2]: &#39;sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e&#39; 4. 打开配置文件 # vim ~/.jupyter/jupyter_notebook_config.py # 常用配置 c.NotebookApp.ip=&#39;*&#39;</description>
+    </item>
+    
+  </channel>
+</rss>

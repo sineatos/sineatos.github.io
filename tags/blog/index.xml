@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Matrix</title>
+    <link>https://sineatos.github.io/tags/blog/</link>
+    <description>Recent content in Blog on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 29 May 2018 21:17:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>这个博客的“第一篇”文章</title>
+      <link>https://sineatos.github.io/life/first-article-in-this-blog/</link>
+      <pubDate>Tue, 29 May 2018 21:17:42 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/life/first-article-in-this-blog/</guid>
+      <description>这是这个博客实际意义上的第一篇文章，为什么说是实际意义？ 因为在发表这一篇文章之前，我还发了另一篇文章旧博客的地址(实际上也可以把那一篇文章当</description>
+    </item>
+    
+    <item>
+      <title>旧博客的地址</title>
+      <link>https://sineatos.github.io/life/the-old-blog-address/</link>
+      <pubDate>Mon, 28 May 2018 21:08:02 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/life/the-old-blog-address/</guid>
+      <description>http://www.cnblogs.com/sineatos 里面主要记录了我大一到大三的做过的一些事 :)</description>
+    </item>
+    
+  </channel>
+</rss>
