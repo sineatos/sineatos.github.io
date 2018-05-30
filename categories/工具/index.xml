@@ -6,134 +6,260 @@
     <description>Recent content in 工具 on Matrix</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 30 May 2018 08:55:39 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 May 2018 15:18:52 +0800</lastBuildDate>
     
 	<atom:link href="https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>TOML简介</title>
+      <link>https://sineatos.github.io/tools/programme-language/others/toml/</link>
+      <pubDate>Wed, 30 May 2018 15:18:52 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/others/toml/</guid>
+      <description>TOML属于配置文件 1. 例子 title = &amp;quot;TOML Example&amp;quot; [owner] name = &amp;quot;Lance Uppercut&amp;quot; dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民 [database] server = &amp;quot;192.168.1.1&amp;quot; ports = [ 8001, 8001, 8002 ] connection_max = 5000 enabled = true [servers] #你可以使用空格、制表符进行缩进，或者</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: smtplib模块和email模块——邮件发送</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/smtplib-and-email/</link>
+      <pubDate>Wed, 30 May 2018 15:14:17 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/smtplib-and-email/</guid>
+      <description>1. smtplib简介 smtplib模块是python中smtp(简单邮件传输协议)的客户端实现。我们可以使用smtplib模块，轻松的发送电</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: abc模块——抽象类和抽象方法的实现</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/abc/</link>
+      <pubDate>Wed, 30 May 2018 15:11:55 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/abc/</guid>
+      <description>基础用法 由于python 没有抽象类、接口的概念，所以要实现这种功能得abc.py 这个类库,具体方式如下 import abc class Foo(metaclass=abc.ABCMeta): ##抽象类 def f1(self): print(123) def f2(self): print(456) @abc.abstractmethod ##抽</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: pickle模块——对象序列化和反序列化</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/pickle/</link>
+      <pubDate>Wed, 30 May 2018 15:09:48 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/pickle/</guid>
+      <description>介绍 在Python2中有pickle模块和cPickle模块，而在Python3中只有pickle模块，其中py2中的pickle模块由py</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: StringIO模块——内存文件</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/stringio/</link>
+      <pubDate>Wed, 30 May 2018 15:07:52 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/stringio/</guid>
+      <description>StringIO的行为与file对象非常像，但它不是磁盘上文件，而是一个内存里的“文件”，我们可以将操作磁盘文件那样来操作StringIO。</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: csv模块——CSV文件的读写</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/csv/</link>
+      <pubDate>Wed, 30 May 2018 15:05:41 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/csv/</guid>
+      <description>CSV简介 CSV(Comma Separated Values，逗号分隔值)也称字符分隔值，因为分隔符可以不是逗号，是一种常用的文本格式，用以存储表格数据，包括数字或者字符。很</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: json模块</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/json/</link>
+      <pubDate>Wed, 30 May 2018 15:01:38 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/json/</guid>
+      <description>主要用到两个函数： 函数名 说明 json.dumps 将 Python 对象编码成 JSON 字符串 json.loads 将已编码的 JSON 字符串解码为 Python 对象 1. json.dumps json.dumps 用于将 Python 对象编码成 JSON 字符串。 语法 json.dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, encoding=&amp;quot;utf-8&amp;quot;,</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: logging模块——日志</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/logging/</link>
+      <pubDate>Wed, 30 May 2018 14:54:39 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/logging/</guid>
+      <description>1. 简单例子 import logging logging.basicConfig(filename = os.path.join(os.getcwd(), &#39;log.txt&#39;), level = logging.DEBUG) logging.debug(&#39;this is a message&#39;) 运行上面例子的代码，将会在程序的根目录下创建一个log.txt文件，打开该文件，里面有一条日志记录： &amp;gt; DEBUG:root:this</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: Python高级数据结构</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/advanced-data-structure/</link>
+      <pubDate>Wed, 30 May 2018 14:45:51 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/advanced-data-structure/</guid>
+      <description>1. collections collections模块包含了内建类型之外的一些有用的工具，例如Counter、defaultdict、OrderedDict、deq</description>
+    </item>
+    
+    <item>
+      <title>Hugo静态网站生成器</title>
+      <link>https://sineatos.github.io/tools/others/hugo-website-generator/</link>
+      <pubDate>Wed, 30 May 2018 14:40:01 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/others/hugo-website-generator/</guid>
+      <description>参考： http://www.gohugo.org/ 安装 二进制安装：https://github.com/spf13/hugo/releases 源码安装：去github上面找源码编译 生</description>
+    </item>
+    
+    <item>
+      <title>java命令: javac</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:37:09 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</guid>
+      <description>功能：读由java语言编写的类和接口的定义，并将它们编译成字节代码的class文件。javac 可以隐式编译一些没有在命令行中提及的源文件。 1.</description>
+    </item>
+    
+    <item>
+      <title>java命令: java</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:33:07 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</guid>
+      <description>1. 查看参数列表 java: 基本参数列表 java -X: 得到扩展参数列表。 2. 基本参数说明 -client, -server 这两个参数用于设置虚拟机使用何种运行模式，client模式启动比较快，但</description>
+    </item>
+    
+    <item>
+      <title>java命令: jar</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:29:45 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</guid>
+      <description>JAR包是Java中所特有一种压缩文档,可以把它理解为.zip包。当然也有区别,JAR包中有一个META-INF\MANIFEST.MF文件</description>
+    </item>
+    
+    <item>
+      <title>Java常用命令行工具</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</link>
+      <pubDate>Wed, 30 May 2018 11:26:57 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</guid>
+      <description>jps : 虚拟机进程状况工具 参数 说明 -q 只输出LVMID，同进程pid -m 输出JVM启动时传给主类main()的参数。 -l 输出主类全名。如果进程执行的是</description>
+    </item>
+    
+    <item>
       <title>Vim常用插件</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-common-plugins/</link>
       <pubDate>Wed, 30 May 2018 08:55:39 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-common-plugins/</guid>
       <description>记录一些我自己正在使用的Vim插件。 插件收集：https://vimawesome.com 对于需要python或者lua支持的vim，可以考</description>
     </item>
     
     <item>
       <title>Vim Buffer</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-buffer/</link>
       <pubDate>Wed, 30 May 2018 08:53:16 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-buffer/</guid>
       <description>参考： http://ju.outofmemory.cn/entry/102211 https://blog.csdn.net/Poechant/article/details/7216168 https://blog.csdn.net/chienchia/article/details/32123297 Buffer是内存中的一块缓冲区域，用于临时存放Vim打开过的文件。用Vim打开文件后，文件就自动被加入到Buffer队列中，而</description>
     </item>
     
     <item>
       <title>Vim学习笔记</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-study-note/</link>
       <pubDate>Wed, 30 May 2018 08:50:35 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-study-note/</guid>
       <description>参考: http://easwy.com/blog/archives/advanced-vim-skills-catalog/ http://www.atool.org/vim.php 除了简单的移动光标、编辑功能以及查找以外，还需要先掌握的： 分割窗口 移动窗口 编辑多个文件 移动以及编辑 hjkl : 左下上右 uiop : 撤销 插入 从下行开</description>
     </item>
     
     <item>
       <title>Maven插件</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-plugin/</link>
       <pubDate>Wed, 30 May 2018 08:47:41 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-plugin/</guid>
       <description>Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： 创建 jar 文件 创建 war 文件 编译代码文件 进行代码单元测试 创建项目文档</description>
     </item>
     
     <item>
       <title>Maven构建生命周期</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-build-life-cycle/</link>
       <pubDate>Wed, 30 May 2018 08:45:32 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-build-life-cycle/</guid>
       <description>阶段 处理 描述 准备资源 资源复制 资源复制可以进行定制 编译 执行编译 源代码编译在此阶段完成 包装 打包 创建JAR/WAR包如在 pom.xml 中定义提及的包 安装 安装 这</description>
     </item>
     
     <item>
       <title>Maven构建可执行的jar包(包含依赖jar包)</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-build-executable-jar/</link>
       <pubDate>Wed, 30 May 2018 08:42:35 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-build-executable-jar/</guid>
       <description>目标：将依赖的第三方jar包打进去 方法：maven-assembly-plugin 遇到过的坑： 修改完pom.xml后，不生效。 改pom.xm</description>
     </item>
     
     <item>
       <title>Maven学习笔记</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-study-note/</link>
       <pubDate>Wed, 30 May 2018 08:37:25 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-study-note/</guid>
       <description>maven的配置 先下载maven(在maven.apache.org) 解压、配置环境变量(保证最终path中有指向maven目录中的bin目</description>
     </item>
     
     <item>
       <title>Docker简单教程</title>
-      <link>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</link>
+      <link>https://sineatos.github.io/tools/develop/docker/docker-tutorial/</link>
       <pubDate>Wed, 30 May 2018 08:33:04 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</guid>
+      <guid>https://sineatos.github.io/tools/develop/docker/docker-tutorial/</guid>
       <description>1. 安装 Docker 要求 Ubuntu 系统的内核版本高于 3.10，且为64位机器 在linux下安装： sudo apt-get install docker sudo apt-get install docker.io 或者安装最新版： wget -qO- https://get.docker.com/ | sh 安装完以后运行： sudo service docker</description>
     </item>
     
     <item>
       <title>常用魔法命令</title>
-      <link>https://sineatos.github.io/tech/tools/develop/jupyter/common-magic-command/</link>
+      <link>https://sineatos.github.io/tools/develop/jupyter/common-magic-command/</link>
       <pubDate>Wed, 30 May 2018 01:47:38 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/common-magic-command/</guid>
+      <guid>https://sineatos.github.io/tools/develop/jupyter/common-magic-command/</guid>
       <description>命令 作用 %quickref 显示 IPython 快速参考 %magic 显示所有魔术命令的详细文档 %debug 从最新的异常跟踪的底部进入交互式调试器 %pdb 在异常发生后自动进入调试器 %reset 删除 interactive 命名空间中的</description>
     </item>
     
     <item>
       <title>Jupyter远程访问设置</title>
-      <link>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</link>
+      <link>https://sineatos.github.io/tools/develop/jupyter/jupyter-remote-visit/</link>
       <pubDate>Wed, 30 May 2018 01:37:44 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</guid>
+      <guid>https://sineatos.github.io/tools/develop/jupyter/jupyter-remote-visit/</guid>
       <description>1. 登录远程服务器 2. 生成配置文件 jupyter notebook --generate-config 3. 生成密码 打开ipython 进行以下操作: In [1]: from notebook.auth import passwd In [2]: passwd() Enter password: Verify password: Out[2]: &#39;sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e&#39; 4. 打开配置文件 # vim ~/.jupyter/jupyter_notebook_config.py # 常用配置 c.NotebookApp.ip=&#39;*&#39;</description>
     </item>
     
     <item>
       <title>IPython学习笔记</title>
-      <link>https://sineatos.github.io/tech/tools/develop/jupyter/ipython-study-note/</link>
+      <link>https://sineatos.github.io/tools/develop/jupyter/ipython-study-note/</link>
       <pubDate>Wed, 30 May 2018 01:29:38 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/ipython-study-note/</guid>
+      <guid>https://sineatos.github.io/tools/develop/jupyter/ipython-study-note/</guid>
       <description>安装与运行 参考http://www.cnblogs.com/zzhzhao/p/5295476.html 安装ipython用pip即可(pi</description>
     </item>
     
     <item>
       <title>Jupyter Notebook 快速入门</title>
-      <link>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-notebook-tutorial/</link>
+      <link>https://sineatos.github.io/tools/develop/jupyter/jupyter-notebook-tutorial/</link>
       <pubDate>Wed, 30 May 2018 01:25:16 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-notebook-tutorial/</guid>
+      <guid>https://sineatos.github.io/tools/develop/jupyter/jupyter-notebook-tutorial/</guid>
       <description>安装 方法一：使用pip进行安装： pip install jupyter 方法二：安装Anaconda即可 运行 运行jupyter notebook，只需要在终端上输入： jupyter notebook 运行完</description>
     </item>
     
     <item>
       <title>Tmux 命令 快捷键</title>
-      <link>https://sineatos.github.io/tech/tools/develop/tmux/tmux-shortcut/</link>
+      <link>https://sineatos.github.io/tools/develop/tmux/tmux-shortcut/</link>
       <pubDate>Wed, 30 May 2018 01:20:14 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/tmux/tmux-shortcut/</guid>
+      <guid>https://sineatos.github.io/tools/develop/tmux/tmux-shortcut/</guid>
       <description>参考: http://blog.csdn.net/u014015972/article/details/51611817 命令 tmux new -s myname 可以指定Session名 [PREFIX-:] new -s 在tmux中创建一个会话 tmux attach-session -t myname 重新连接此会话 tmux attach tmux attach -t basic 重新连接basic这个会话 tmux a -t</description>
     </item>
     
     <item>
       <title>Tmux 速成教程:技巧和调整</title>
-      <link>https://sineatos.github.io/tech/tools/develop/tmux/tmux-tutorial/</link>
+      <link>https://sineatos.github.io/tools/develop/tmux/tmux-tutorial/</link>
       <pubDate>Wed, 30 May 2018 01:00:40 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/tmux/tmux-tutorial/</guid>
+      <guid>https://sineatos.github.io/tools/develop/tmux/tmux-tutorial/</guid>
       <description>基础知识 Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常</description>
     </item>
     

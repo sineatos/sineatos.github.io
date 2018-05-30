@@ -6,44 +6,80 @@
     <description>Recent content in Java on Matrix</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 30 May 2018 08:47:41 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 May 2018 11:37:09 +0800</lastBuildDate>
     
 	<atom:link href="https://sineatos.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>java命令: javac</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:37:09 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</guid>
+      <description>功能：读由java语言编写的类和接口的定义，并将它们编译成字节代码的class文件。javac 可以隐式编译一些没有在命令行中提及的源文件。 1.</description>
+    </item>
+    
+    <item>
+      <title>java命令: java</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:33:07 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</guid>
+      <description>1. 查看参数列表 java: 基本参数列表 java -X: 得到扩展参数列表。 2. 基本参数说明 -client, -server 这两个参数用于设置虚拟机使用何种运行模式，client模式启动比较快，但</description>
+    </item>
+    
+    <item>
+      <title>java命令: jar</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:29:45 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</guid>
+      <description>JAR包是Java中所特有一种压缩文档,可以把它理解为.zip包。当然也有区别,JAR包中有一个META-INF\MANIFEST.MF文件</description>
+    </item>
+    
+    <item>
+      <title>Java常用命令行工具</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</link>
+      <pubDate>Wed, 30 May 2018 11:26:57 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</guid>
+      <description>jps : 虚拟机进程状况工具 参数 说明 -q 只输出LVMID，同进程pid -m 输出JVM启动时传给主类main()的参数。 -l 输出主类全名。如果进程执行的是</description>
+    </item>
+    
+    <item>
       <title>Maven插件</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-plugin/</link>
       <pubDate>Wed, 30 May 2018 08:47:41 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-plugin/</guid>
       <description>Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： 创建 jar 文件 创建 war 文件 编译代码文件 进行代码单元测试 创建项目文档</description>
     </item>
     
     <item>
       <title>Maven构建生命周期</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-build-life-cycle/</link>
       <pubDate>Wed, 30 May 2018 08:45:32 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-build-life-cycle/</guid>
       <description>阶段 处理 描述 准备资源 资源复制 资源复制可以进行定制 编译 执行编译 源代码编译在此阶段完成 包装 打包 创建JAR/WAR包如在 pom.xml 中定义提及的包 安装 安装 这</description>
     </item>
     
     <item>
       <title>Maven构建可执行的jar包(包含依赖jar包)</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-build-executable-jar/</link>
       <pubDate>Wed, 30 May 2018 08:42:35 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-build-executable-jar/</guid>
       <description>目标：将依赖的第三方jar包打进去 方法：maven-assembly-plugin 遇到过的坑： 修改完pom.xml后，不生效。 改pom.xm</description>
     </item>
     
     <item>
       <title>Maven学习笔记</title>
-      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</link>
+      <link>https://sineatos.github.io/tools/develop/maven/maven-study-note/</link>
       <pubDate>Wed, 30 May 2018 08:37:25 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</guid>
+      <guid>https://sineatos.github.io/tools/develop/maven/maven-study-note/</guid>
       <description>maven的配置 先下载maven(在maven.apache.org) 解压、配置环境变量(保证最终path中有指向maven目录中的bin目</description>
     </item>
     

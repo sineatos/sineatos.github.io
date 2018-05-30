@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Python标准库: logging模块——日志</title>
+	<meta name="description" content="logging">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Python标准库: logging模块——日志" />
+<meta property="og:description" content="logging" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/python/stdlib/logging/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T14:54:39&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T14:54:39&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Python标准库: logging模块——日志</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T14:54:39">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/python" rel="category">Python</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<h2 id="1-简单例子">1. 简单例子</h2>
+
+<pre><code>import logging
+
+logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), level = logging.DEBUG)
+
+logging.debug('this is a message')
+</code></pre>
+
+<p>运行上面例子的代码，将会在程序的根目录下创建一个log.txt文件，打开该文件，里面有一条日志记录：
+&gt; DEBUG:root:this is a message</p>
+
+<h2 id="2-四个主要的组件">2. 四个主要的组件</h2>
+
+<ul>
+<li><code>logger</code>: 日志类，应用程序往往通过调用它提供的api来记录日志；</li>
+<li><code>handler</code>: 对日志信息处理，可以将日志发送(保存)到不同的目标域中；</li>
+<li><code>filter</code>: 对日志信息进行过滤；</li>
+<li><code>formatter</code>:日志的格式化；</li>
+</ul>
+
+<h2 id="3-日志级别">3. 日志级别</h2>
+
+<p>在记录日志时, 日志消息都会关联一个级别(“级别”本质上是一个非负整数)，且越大说明级别越高，事件严重性越高。系统默认提供了6个级别，它们分别是：</p>
+
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>对应的值</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CRITICAL</td>
+<td>50</td>
+</tr>
+
+<tr>
+<td>ERROR</td>
+<td>40</td>
+</tr>
+
+<tr>
+<td>WARNING</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>INFO</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>DEBUG</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td>NOTSET</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>可以给日志对象(Logger Instance)设置日志级别，低于该级别的日志消息将会被忽略，也可以给<code>Hanlder</code>设置日志级别，对于低于该级别的日志消息, <code>Handler</code>也会忽略。</p>
+
+<h2 id="4-logging模块中的常用函数">4. logging模块中的常用函数</h2>
+
+<h3 id="4-1-logging-basicconfig">4.1 logging.basicConfig</h3>
+
+<pre><code>logging.basicConfig([**kwargs])
+</code></pre>
+
+<p>为日志模块配置基本信息。默认情况下python的logging模块将日志打印到了标准输出中，<code>kwargs</code> 支持如下几个关键字参数：</p>
+
+<ul>
+<li><code>filename</code> ：日志文件的保存路径。如果配置了些参数，将自动创建一个<code>FileHandler</code>作为<code>Handler</code>；</li>
+<li><code>filemode</code> ：日志文件的打开模式。 默认值为’a&rsquo;，表示日志消息以追加的形式添加到日志文件中。如果设为’w&rsquo;, 那么每次程序启动的时候都会创建一个新的日志文件；</li>
+<li><code>format</code> ：设置日志输出格式；</li>
+<li><code>datefmt</code> ：定义日期格式；</li>
+<li><code>level</code> ：设置日志的级别.对低于该级别的日志消息将被忽略；</li>
+<li><code>stream</code> ：设置特定的流用于初始化<code>StreamHandler</code>；</li>
+</ul>
+
+<p>format参数中可能用到的格式化串：</p>
+
+<table>
+<thead>
+<tr>
+<th>格式化字符串</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>%(name)s</td>
+<td>Logger的名字</td>
+</tr>
+
+<tr>
+<td>%(levelno)s</td>
+<td>数字形式的日志级别</td>
+</tr>
+
+<tr>
+<td>%(levelname)s</td>
+<td>文本形式的日志级别</td>
+</tr>
+
+<tr>
+<td>%(pathname)s</td>
+<td>调用日志输出函数的模块的完整路径名，可能没有</td>
+</tr>
+
+<tr>
+<td>%(filename)s</td>
+<td>调用日志输出函数的模块的文件名</td>
+</tr>
+
+<tr>
+<td>%(module)s</td>
+<td>调用日志输出函数的模块名</td>
+</tr>
+
+<tr>
+<td>%(funcName)s</td>
+<td>调用日志输出函数的函数名</td>
+</tr>
+
+<tr>
+<td>%(lineno)d</td>
+<td>调用日志输出函数的语句所在的代码行</td>
+</tr>
+
+<tr>
+<td>%(created)f</td>
+<td>当前时间，用UNIX标准的表示时间的浮 点数表示</td>
+</tr>
+
+<tr>
+<td>%(relativeCreated)d</td>
+<td>输出日志信息时的，自Logger创建以 来的毫秒数</td>
+</tr>
+
+<tr>
+<td>%(asctime)s</td>
+<td>字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒</td>
+</tr>
+
+<tr>
+<td>%(thread)d</td>
+<td>线程ID。可能没有</td>
+</tr>
+
+<tr>
+<td>%(threadName)s</td>
+<td>线程名。可能没有</td>
+</tr>
+
+<tr>
+<td>%(process)d</td>
+<td>进程ID。可能没有</td>
+</tr>
+
+<tr>
+<td>%(message)s</td>
+<td>用户输出的消息</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>
+import logging
+
+logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), /
+
+level = logging.WARN, filemode = 'w', format = '%(asctime)s - %(levelname)s: %(message)s')
+
+logging.debug('debug') #被忽略
+
+logging.info('info') #被忽略
+
+logging.warning('warn')
+
+logging.error('error')
+
+#----- 结果
+
+#2009-07-13 21:42:15,592 - WARNING: warn
+
+#2009-07-13 21:42:15,640 - ERROR: error
+</code></pre>
+
+<h3 id="4-2-logging-getlogger">4.2 logging.getLogger</h3>
+
+<pre><code>logging.getLogger([name])
+</code></pre>
+
+<p>创建<code>Logger</code>对象。日志记录的工作主要由<code>Logger</code>对象来完成。在调用<code>getLogger</code>时要提供<code>Logger</code>的名称(注：多次使用相同名称来调用<code>getLogger</code>，返回的是同一个对象的引用。)，<code>Logger</code>实例之间有层次关系，这些关系通过<code>Logger</code>名称来体现，如：</p>
+
+<pre><code>p = logging.getLogger(“root”)
+c1 = logging.getLogger(“root.c1″)
+c2 = logging.getLogger(“root.c2″)
+</code></pre>
+
+<p>例子中，p是父logger, c1,c2分别是p的子logger。c1, c2将继承p的设置。如果省略了name参数, getLogger将返回日志对象层次关系中的根Logger。</p>
+
+<h3 id="4-3-logging-getlevelname">4.3 logging.getLevelName</h3>
+
+<pre><code>logging.getLevelName(lvl)
+</code></pre>
+
+<p>获取日志级别对应的名称</p>
+
+<h3 id="4-4-logging-shutdown">4.4 logging.shutdown</h3>
+
+<pre><code>logging.shutdown()
+</code></pre>
+
+<p>当不再使用日志系统的时候，调用该方法，它会将日志flush到对应的目标域上。一般在系统退出的时候调用。</p>
+
+<h3 id="4-5-logging-exception">4.5 logging.exception</h3>
+
+<p>记录异常信息</p>
+
+<pre><code>logging.exception(&quot;Exception Logged&quot;)
+</code></pre>
+
+<h2 id="5-logger对象">5. Logger对象</h2>
+
+<h3 id="5-1-logger-setlevel-lvl">5.1 Logger.setLevel(lvl)</h3>
+
+<pre><code>Logger.setLevel(lvl)
+</code></pre>
+
+<p>设置日志的级别。对于低于该级别的日志消息将被忽略。下面一个例子演示setLevel方法：</p>
+
+<pre><code>#coding=gbk
+
+import logging
+
+logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), level = logging.DEBUG)
+
+log = logging.getLogger('root.test')
+
+log.setLevel(logging.WARN) #日志记录级别为WARNNING
+
+log.info('info') #不会被记录
+
+log.debug('debug') #不会被记录
+
+log.warning('warnning')
+
+log.error('error')
+</code></pre>
+
+<h3 id="5-2-logger-debug-msg-args-kwargs">5.2 Logger.debug(msg [ ,*args [, **kwargs]])</h3>
+
+<pre><code>Logger.debug(msg [ ,*args [, **kwargs]])
+Logger.info(msg[ , *args[ , **kwargs] ] )
+Logger.warnning(msg[ , *args[ , **kwargs] ] )
+Logger.error(msg[ , *args[ , **kwargs] ] )
+Logger.critical(msg[ , *args[ , **kwargs] ] )
+</code></pre>
+
+<p>记录DEBUG等级别的日志信息。参数msg是信息的格式，args与kwargs分别是格式参数。</p>
+
+<h3 id="5-3-logger-log-lvl-msg-args-kwargs">5.3 Logger.log(lvl, msg[ , *args[ , **kwargs] ] )</h3>
+
+<pre><code>Logger.log(lvl, msg[ , *args[ , **kwargs] ] )
+</code></pre>
+
+<p>记录日志，参数lvl用户设置日志信息的级别。参数msg, *args, **kwargs的含义与Logger.debug一样。</p>
+
+<h3 id="5-4-logger-exception-msg-args">5.4 Logger.exception(msg[, *args])</h3>
+
+<pre><code>Logger.exception(msg[, *args])
+</code></pre>
+
+<p>以ERROR级别记录日志消息，异常跟踪信息将被自动添加到日志消息里。Logger.exception通过用在异常处理块中，如：</p>
+
+<pre><code>import logging
+
+logging.basicConfig(filename = os.path.join(os.getcwd(), 'log.txt'), level = logging.DEBUG)
+log = logging.getLogger('root')
+try:
+    raise Exception, 'this is a exception'
+except:
+    log.exception('exception') #异常信息被自动添加到日志消息中
+</code></pre>
+
+<h3 id="5-5-logger-addfilter-filt-logger-removefilter-filt">5.5 Logger.addFilter(filt), Logger.removeFilter(filt)</h3>
+
+<pre><code>Logger.addFilter(filt)
+Logger.removeFilter(filt)
+</code></pre>
+
+<p>添加/移除日志消息过滤器。在讲述Filter时具体介绍。</p>
+
+<h3 id="5-6-logger-addhandler-hdlr-logger-removehandler-hdlr">5.6 Logger.addHandler(hdlr), Logger.removeHandler(hdlr)</h3>
+
+<pre><code>Logger.addHandler(hdlr)
+Logger.removeHandler(hdlr)
+</code></pre>
+
+<p>添加/移除日志消息处理器。在讲述Handler时具体介绍。</p>
+
+<h3 id="5-7-logger-makerecord-name-lvl-fn-lno-msg-args-exc-info-func-extra">5.7 Logger.makeRecord(name, lvl, fn, lno, msg, args, exc_info[, func, extra])</h3>
+
+<pre><code>Logger.makeRecord(name, lvl, fn, lno, msg, args, exc_info[, func, extra])
+</code></pre>
+
+<p>创建LogRecord对象。日志消息被实例为一个LogRecord对象，并在日志类内处理。</p>
+
+<h3 id="5-8-logger-exception">5.8 Logger.exception</h3>
+
+<p>记录异常信息</p>
+
+<pre><code>Logger.exception(&quot;Exception Logged&quot;)
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/python%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">Python标准库</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/python/stdlib/advanced-data-structure/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Python标准库: Python高级数据结构</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/python/stdlib/json/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Python标准库: json模块</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

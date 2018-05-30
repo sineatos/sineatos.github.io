@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>java命令: jar</title>
+	<meta name="description" content="Java cli: &#39;jar&#39; Introduction">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="java命令: jar" />
+<meta property="og:description" content="Java cli: &#39;jar&#39; Introduction" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T11:29:45&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T11:29:45&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">java命令: jar</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T11:29:45">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/java" rel="category">Java</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<p>JAR包是Java中所特有一种压缩文档,可以把它理解为.zip包。当然也有区别,JAR包中有一个<code>META-INF\MANIFEST.MF</code>文件,当你生成JAR包时,它会自动生成。</p>
+
+<p>JAR包是由<code>JDK安装目录\bin\jar(.exe)</code>命令生成的，当安装好JDK，设置好path路径，就可以正常使用<code>jar(.exe)</code>命令，它会用<code>lib\tool.jar</code>工具包中的类。</p>
+
+<h2 id="1-jar命令参数">1. jar命令参数</h2>
+
+<p>jar命令格式：<code>jar {ctxuf}[vme0Mi][-C 目录]文件名...</code></p>
+
+<p>其中<code>{ctxu}</code>这四个参数必须选其一。<code>[vfme0Mi]</code>是可选参数，文件名也是必须的。</p>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-c</td>
+<td>创建一个jar包</td>
+</tr>
+
+<tr>
+<td>-t</td>
+<td>显示jar中的内容列表</td>
+</tr>
+
+<tr>
+<td>-x</td>
+<td>解压jar包</td>
+</tr>
+
+<tr>
+<td>-u</td>
+<td>添加文件到jar包中</td>
+</tr>
+
+<tr>
+<td>-f</td>
+<td>指定jar包的文件名</td>
+</tr>
+
+<tr>
+<td>-v</td>
+<td>生成详细的报造，并输出至标准设备</td>
+</tr>
+
+<tr>
+<td>-m</td>
+<td>指定manifest.mf文件.(manifest.mf文件中可以对jar包及其中的内容作一些一设置)</td>
+</tr>
+
+<tr>
+<td>-0</td>
+<td>产生jar包时不对其中的内容进行压缩处理</td>
+</tr>
+
+<tr>
+<td>-M</td>
+<td>不产生所有文件的清单文件(Manifest.mf)。这个参数与忽略掉-m参数的设置</td>
+</tr>
+
+<tr>
+<td>-i</td>
+<td>为指定的jar文件创建索引文件</td>
+</tr>
+
+<tr>
+<td>-C</td>
+<td>表示转到相应的目录下执行jar命令,相当于cd到那个目录，然后不带-C执行jar命令</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="2-jar使用范例">2. jar使用范例</h2>
+
+<ol>
+<li>创建jar包
+<code>
+jar cf hello.jar hello
+</code>
+利用test目录生成hello.jar包,若hello.jar存在,则覆盖</li>
+<li>创建并显示打包过程
+<code>
+jar cvf hello.jar hello
+</code>
+利用hello目录创建hello.jar包,并显示创建过程，例：
+<code>
+E:\&gt;jar cvf hello.jar hello
+</code></li>
+<li>显示jar包
+<code>
+jar tvf hello.jar
+</code>
+查看hello.jar包的内容，指定的jar包必须真实存在，否则会发生FileNoutFoundException。</li>
+<li>解压jar包
+<code>
+jar xvf hello.jar
+</code>
+解压hello.jar至当前目录</li>
+<li>jar中添加文件
+<code>
+jar uf hello.jar HelloWorld.java
+</code>
+将HelloWorld.java添加到hello.jar包中</li>
+<li>创建不压缩内容jar包：
+<code>
+jar cvf0 hello.jar *.class
+</code>
+利用当前目录中所有的.class文件生成一个不压缩jar包</li>
+<li>创建带manifest.mf文件的jar包
+<code>
+jar cvfm hello.jar manifest.mf hello
+</code>
+创建的jar包多了一个META-INF目录,META-INF止录下多了一个manifest.mf文件,至于manifest.mf的作用,后面会提到.</li>
+<li>忽略manifest.mf文件
+<code>
+jar cvfM hello.jar hello
+</code>
+生成的jar包中不包括META-INF目录及manifest.mf文件</li>
+<li>加-C应用
+<code>
+jar cvfm hello.jar mymanifest.mf -C hello/
+</code>
+表示在切换到hello目录下然后再执行jar命令</li>
+<li>-i为jar文件生成索引列表，当一个jar包中的内容很好的时候，你可以给它生成一个索引文件，这样看起来很省事。
+<code>
+jar i hello.jar
+</code>
+执行完这条命令后，它会在hello.jar包的META-INF文件夹下生成一个名为INDEX.LIST的索引文件，它会生成一个列表，最上边为jar包名。</li>
+
+<li><p>导出解压列表</p>
+
+<pre><code>jar tvf hello.jar &gt;hello.txt
+</code></pre>
+
+<p>如果你想查看解压一个jar的详细过程，而这个jar包又很大，屏幕信息会一闪而过，这时你可以把列表输出到一个文件中。</p></li>
+
+<li><p><code>jar -cvf hello.jar hello/*</code>
+例如原目录结构如下：</p>
+
+<pre><code>hello
+    |---com
+    |---org
+</code></pre>
+
+<p>你本想只把com目录和org目录打包，而这时jar命令会连同hello目也一块打包进。这点大家要注意。jar命令生成的压缩文件会包含它后边出的目录。我们应该进入到hello目录再执行jar命令。</p></li>
+</ol>
+
+<p>注意：<code>manifest.mf</code>这个文件名，用户可以任指定，但jar命令只认识<code>Manifest.mf</code>，它会对用户指定的文件名进行相应在的转换，这不需用户担心。</p>
+
+<h2 id="3-manifest-mf文件编写规则">3. Manifest.mf文件编写规则</h2>
+
+<p>manifest.mf的编写一定要注意一些细节。</p>
+
+<ol>
+<li>不能有空行和空格的地方: 第一行不可以是空行( 第一行的行前不可以有空行)，行与行之间不能有空行，行尾不可以有空格。</li>
+<li>一定要有空行的地方: 最后一行得是空行(在输完内容后加一个回车就OK)</li>
+<li>一定有空格的地方:
+<code>
+key: value
+</code>
+在分号后面一定要写写一个空格</li>
+</ol>
+
+<h2 id="4-怎样使用jar包中的类">4. 怎样使用jar包中的类</h2>
+
+<p>还是写个小例子吧，这样直观！</p>
+
+<pre><code>public final  class  Person {
+
+    public static  int  age() {
+        return 30;
+    }
+}
+</code></pre>
+
+<pre><code>-&gt; javac Person.java
+-&gt;jar cvf person.jar Person.class
+</code></pre>
+
+<p>将上面的文件打成一个jar包</p>
+
+<p>再写一个类对其进行调用:</p>
+
+<pre><code>public class MyAge {
+    public static void getAge() {
+        System.out.println(Person.age());
+    }
+}
+</code></pre>
+
+<pre><code>-&gt;javac MyAge.java
+-&gt;java -classpath person.jar MyAge
+</code></pre>
+
+<h2 id="5-创建可执行jar包">5. 创建可执行jar包</h2>
+
+<p>有时自己写个程序，类一大堆，时间一长连自己都不知道那个是主类，而且有可能用到图片或其它文件一大堆，看得也乱，这时你可以考虑把它做成一个可执行jar包&hellip;</p>
+
+<ol>
+<li>编辑manifest.mf文件加入下面一行
+<code>
+Main-Class: MyApplet
+</code>
+注意: <code>Main-Class</code>的大小固定，冒号后的空格,<code>MyApplet</code>后一定输入回车，然后保存。</li>
+<li>打包
+<code>
+jar cvfm FirstApplet.jar manifest.mf MyApplet.class
+</code>
+注意:manifest.mf指定为存放Mani-Class: MyApplet文件的class路径(如：hello.Hello)或者文件名(applet)</li>
+<li>可执行jar的使用
+<code>
+java -jar FirstApplet.jar
+</code>
+也可以在<code>&lt;applet&gt;&lt;/applet&gt;</code>中使用:</li>
+</ol>
+
+<pre><code>&lt;applet code=MyApplet archive=FirstApplet.jar width=200 height=100&gt;&lt;/applet&gt;
+</code></pre>
+
+<p>注意：类并没有给出，大家随便写一个就行，类名包名自己随意定，相应的更改就可以&hellip;</p>
+
+<h2 id="6-扩展自己的类">6. 扩展自己的类</h2>
+
+<p>在JDK的安装目录\jre\lib\ext目录下，SUN为大家为我们扩展自己类的提供了方便，大家可以将自己的类文件打成.jar包放在此目录下，它由ExtClassLoader类装器负责进行装载，ExtClassLoader类装器是AppClassLoader类装载器的父装载器，AppClassLoader主要负责加载CLASSPATH路径下的文件，而在java中采用的又是委托父装载器的机制，所以此目录下存放的jar中的类文件不做任何的设置，类装载器就可以找到正常的加载。</p>
+
+<p>如果你的.jar是给applet小应用程序看的，可以在打成jar包之前，在其manifest.mf加入下面两行。</p>
+
+<pre><code>Class-Path: FirstApplet.jar
+Class-path: SecondApplet.jar
+Main-Class: MyApplet
+</code></pre>
+
+<p>注意：Class-path可以设置多项，直接写jar包名既可。Main-Class主要当jar中有多个.class类文件时,java并不知道那个才是主类，所以要指定，如果jar包中只有一个类当然可以不指定。</p>
+
+<p>Java调用类的顺序：java\lib\ext中的类&mdash;&gt;Manifest.mf中指定的类&ndash;&gt;当前目录中的类&ndash;&gt;set CLASSPATH中指定的类。</p>
+
+<h2 id="7-调用url网络上的jar包">7. 调用URL网络上的jar包</h2>
+
+<ol>
+<li>生成jar包的URL
+<code>
+URL u=new
+URL(&quot;jar:&quot;+&quot;FirstAppplet.jar&quot;+!/&quot;);
+</code></li>
+<li>建立jarURLConnection对象
+<code>
+JarURLConnection juc=(JarURLConnection)u.openConnection();
+</code></li>
+<li>返回jar包中主类的名字
+<code>
+Attributes attr=juc.getMainAttributes();
+String name=attr.getValue(&quot;Mani-Class&quot;);
+</code>
+一定要确保你的jar包中的manifest.mf中已正确的设置了Mani-Class属性，再强调一下一定要注意规则。</li>
+<li>根据得到的主类名创建Class对象
+<code>
+Class c=Class.forName(name);
+</code></li>
+<li>根据Class对象调用其main方法
+<code>
+Method cm=c.getMethod(&quot;main&quot;,new
+Class[]{String.class});
+cm.invoke(null,new Object[]{});
+</code>
+提示:上边用到了Reflection反射机制的相关知识，大家如果多反射机制有兴趣，可查看java.lang.reflect包中的相关内容.</li>
+</ol>
+
+<h2 id="8-jar命令使用技巧">8. JAR命令使用技巧</h2>
+
+<ol>
+<li><p>jar创建压ZIP文件</p>
+
+<pre><code>jar cvfM TestZIP.jar test
+</code></pre>
+
+<p>加M参数为了不生成META-INF相关内容。然后将TestZIP.jar改为TestZIP.zip就可以，是不是很简单&hellip;.</p></li>
+
+<li><p>使用WinRAR解压.jar文件
+上边我们已经说过了，说JAR文件是一种特殊的压缩文件，所以它当然可以用我们常用的一些解压缩工具来解了，至于怎么解，这就不用我说了吧。</p></li>
+
+<li><p>用WinRAR生成.jar文件
+我们已经说过JAR包与ZIP包主要区别就是JAR包中多一个META-INF的目录，META-INF目录下有一个manifest.mf文件，我们只要建立好相关的目录一压缩就可以了。
+目录的结构如下：</p>
+
+<pre><code>  TestJar
+      |--META-INF
+            |--manifest.mf
+      |--相关的类文件
+</code></pre></li>
+</ol>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java%E5%91%BD%E4%BB%A4/" rel="tag">Java命令</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/java-common-cli/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Java常用命令行工具</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/java-introduction/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">java命令: java</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

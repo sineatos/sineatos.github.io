@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>标记语言 on Matrix</title>
+    <link>https://sineatos.github.io/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in 标记语言 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 15:18:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TOML简介</title>
+      <link>https://sineatos.github.io/tools/programme-language/others/toml/</link>
+      <pubDate>Wed, 30 May 2018 15:18:52 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/others/toml/</guid>
+      <description>TOML属于配置文件 1. 例子 title = &amp;quot;TOML Example&amp;quot; [owner] name = &amp;quot;Lance Uppercut&amp;quot; dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民 [database] server = &amp;quot;192.168.1.1&amp;quot; ports = [ 8001, 8001, 8002 ] connection_max = 5000 enabled = true [servers] #你可以使用空格、制表符进行缩进，或者</description>
+    </item>
+    
+  </channel>
+</rss>

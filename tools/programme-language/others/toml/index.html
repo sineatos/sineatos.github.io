@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TOML简介</title>
+	<meta name="description" content="TOML">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="TOML简介" />
+<meta property="og:description" content="TOML" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/others/toml/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T15:18:52&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T15:18:52&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">TOML简介</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T15:18:52">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<p>TOML属于配置文件</p>
+
+<h2 id="1-例子">1. 例子</h2>
+
+<pre><code>title = &quot;TOML Example&quot;
+
+[owner]
+name = &quot;Lance Uppercut&quot;
+dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民
+
+[database]
+server = &quot;192.168.1.1&quot;
+ports = [ 8001, 8001, 8002 ]
+connection_max = 5000
+enabled = true
+
+[servers]
+  #你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。
+  [servers.alpha]
+  ip = &quot;10.0.0.1&quot;
+  dc = &quot;eqdc10&quot;
+
+  [servers.beta]
+  ip = &quot;10.0.0.2&quot;
+  dc = &quot;eqdc10&quot;
+
+[clients]
+data = [ [&quot;gamma&quot;, &quot;delta&quot;], [1, 2] ]
+
+# 数组内可以混入换行符
+hosts = [
+  &quot;alpha&quot;,
+  &quot;omega&quot;
+]
+</code></pre>
+
+<h2 id="2-规范">2. 规范</h2>
+
+<ul>
+<li>TOML是大小写敏感的</li>
+<li>TOML文件必须是UTF8编码的</li>
+<li>空白符可以是制表符(0x09)或空格(0x20)</li>
+<li>换行符可以是 LF (0x0A) 或 CRLF (0x0D0A)</li>
+</ul>
+
+<h3 id="2-1-注释">2.1 注释</h3>
+
+<p>使用<code>#</code>来表示注释开始，至当前行尾结束。</p>
+
+<pre><code># I am a comment. Hear me roar. Roar.
+key = &quot;value&quot; # Yeah, you can do this.
+</code></pre>
+
+<h3 id="2-2-字符串">2.2 字符串</h3>
+
+<p>TOML中有4种字符串表示方法：基本、多行-基本、字面量、多行-字面量。所有字符串必须是合法的UTF8字符。</p>
+
+<h4 id="2-2-1-基本字符串">2.2.1 基本字符串</h4>
+
+<p>由双引号包裹，所有Unicode字符均可出现，除了双引号、反斜线、控制字符(U+0000 to U+001F)需要转义。</p>
+
+<pre><code>str = &quot;I'm a string. \&quot;You can quote me\&quot;. Name\tJos\u00E9\nLocation\tSF.&quot;
+</code></pre>
+
+<p>常用的转义序列：</p>
+
+<table>
+<thead>
+<tr>
+<th>转义符</th>
+<th>说明</th>
+<th>UTF编码</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\b</td>
+<td>backspace</td>
+<td>(U+0008)</td>
+</tr>
+
+<tr>
+<td>\t</td>
+<td>tab</td>
+<td>(U+0009)</td>
+</tr>
+
+<tr>
+<td>\n</td>
+<td>linefeed</td>
+<td>(U+000A)</td>
+</tr>
+
+<tr>
+<td>\f</td>
+<td>form feed</td>
+<td>(U+000C)</td>
+</tr>
+
+<tr>
+<td>\r</td>
+<td>carriage return</td>
+<td>(U+000D)</td>
+</tr>
+
+<tr>
+<td>\&rdquo;</td>
+<td>quote</td>
+<td>(U+0022)</td>
+</tr>
+
+<tr>
+<td>\</td>
+<td>backslash</td>
+<td>(U+005C)</td>
+</tr>
+
+<tr>
+<td>\uXXXX</td>
+<td>unicode</td>
+<td>(U+XXXX)</td>
+</tr>
+
+<tr>
+<td>\UXXXXXXXX</td>
+<td>unicode</td>
+<td>(U+XXXXXXXX)</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="2-2-2-多行-基本字符串">2.2.2 多行-基本字符串</h4>
+
+<p>由三个双引号包裹，除了分隔符开始的换行外，字符串内的换行将被保留。</p>
+
+<pre><code>str1 = &quot;&quot;&quot;
+Roses are red
+Violets are blue&quot;&quot;&quot;
+</code></pre>
+
+<p>TOML解析器可以将其翻译为平台相关的字符串。</p>
+
+<p>在多行-基本字符串中可以在行尾使用\来忽略其后的所有(换行符和空白符）直到第一个非空白符。</p>
+
+<pre><code># 以下字符串等价
+str1 = &quot;The quick brown fox jumps over the lazy dog.&quot;
+
+str2 = &quot;&quot;&quot;
+The quick brown \
+
+
+  fox jumps over \
+    the lazy dog.&quot;&quot;&quot;
+
+key3 = &quot;&quot;&quot;\
+       The quick brown \
+       fox jumps over \
+       the lazy dog.\
+       &quot;&quot;&quot;
+</code></pre>
+
+<h4 id="2-2-3-字面量字符串">2.2.3 字面量字符串</h4>
+
+<p>由单引号包裹，其内不允许转义，因此可以方便的表示基本字符串中需要转义的内容。</p>
+
+<pre><code># What you see is what you get.
+winpath  = 'C:\Users\nodejs\templates'
+winpath2 = '\\ServerX\admin$\system32\'
+quoted   = 'Tom &quot;Dubs&quot; Preston-Werner'
+regex    = '&lt;\i\c*\s*&gt;'
+</code></pre>
+
+<h4 id="2-2-4-多行-字面量字符串">2.2.4 多行-字面量字符串</h4>
+
+<p>与多行-基本字符串类似。</p>
+
+<h3 id="2-3-整数">2.3 整数</h3>
+
+<pre><code>int1 = +99
+int2 = 42
+int3 = 0
+int4 = -17
+</code></pre>
+
+<p>为了增加可读性，整数可以使用_分隔。每个_必须被至少一个数字环绕。不被允许的表达：前置0，2、8、16进制、无穷、NaN。 整数的范围是64bit signed long类型的范围。</p>
+
+<h3 id="2-4-浮点数">2.4 浮点数</h3>
+
+<pre><code># fractional
+flt1 = +1.0
+flt2 = 3.1415
+flt3 = -0.01
+
+# exponent
+flt4 = 5e+22
+flt5 = 1e6
+flt6 = -2E-2
+
+# both
+flt7 = 6.626e-34
+</code></pre>
+
+<p>浮点数的范围是64 bit double类型的范围。</p>
+
+<h3 id="2-5-布尔值">2.5 布尔值</h3>
+
+<p>小写的true或false。</p>
+
+<pre><code>bool1 = true
+bool2 = false
+</code></pre>
+
+<h3 id="2-6-日期时间">2.6 日期时间</h3>
+
+<p>使用RFC 3339描述的时间格式</p>
+
+<pre><code>date1 = 1979-05-27T07:32:00Z
+date2 = 1979-05-27T00:32:00-07:00
+date3 = 1979-05-27T00:32:00.999999-07:00
+</code></pre>
+
+<h3 id="2-7-数组">2.7 数组</h3>
+
+<p>数组使用方括号包裹。空格会被忽略，包括换行符。元素使用逗号分隔。注意，不允许混用数据类型(所有的字符串类型均为同一类型)。</p>
+
+<pre><code>arr1 = [ 1, 2, 3 ]
+arr2 = [ &quot;red&quot;, &quot;yellow&quot;, &quot;green&quot; ]
+arr3 = [ [ 1, 2 ], [3, 4, 5] ]
+arr4 = [ &quot;all&quot;, 'strings', &quot;&quot;&quot;are the same&quot;&quot;&quot;, '''type''']   # this is ok
+arr5 = [ [ 1, 2 ], [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;] ]    # this is ok
+arr6 = [ 1, 2.0 ]         # note: this is NOT ok
+</code></pre>
+
+<h3 id="2-8-表格">2.8 表格</h3>
+
+<p>表格叶称为哈希表或字典，用来存储键值对。表格名由方括号包裹，且自成一行。</p>
+
+<pre><code>[table]
+</code></pre>
+
+<p>表格名下，直到下一个表格名或文件尾，均为当前表格的内容。</p>
+
+<pre><code>[table]
+key = &quot;value&quot;
+bare_key = &quot;value&quot;
+bare-key = &quot;value&quot;
+
+&quot;127.0.0.1&quot; = &quot;value&quot;
+&quot;character encoding&quot; = &quot;value&quot;
+&quot;ʎǝʞ&quot; = &quot;value&quot;
+</code></pre>
+
+<p>表格可以嵌套，即表格中某个键的值可以为表格。</p>
+
+<pre><code>[dog]
+onekey = onevalue
+
+[dog.tater]
+type = &quot;pug&quot;
+</code></pre>
+
+<p>等价于</p>
+
+<pre><code>{
+    &quot;dog&quot;: { 
+        &quot;onekey&quot;:&quot;onevalue&quot;,
+        &quot;tater&quot;: { &quot;type&quot;: &quot;pug&quot; } 
+    } 
+}
+</code></pre>
+
+<p>如果你不想的话，你不用声明所有的父表。TOML　知道该如何处理。</p>
+
+<pre><code># [x] 你
+# [x.y] 不需要
+# [x.y.z] 这些
+[x.y.z.w] # 可以直接写
+</code></pre>
+
+<h3 id="2-9-表格数组">2.9 表格数组</h3>
+
+<pre><code>[[products]]
+name = &quot;Hammer&quot;
+sku = 738594937
+
+[[products]]
+
+[[products]]
+name = &quot;Nail&quot;
+sku = 284758393
+color = &quot;gray&quot;
+</code></pre>
+
+<p>等价于以下的　JSON 结构：</p>
+
+<pre><code>{
+  &quot;products&quot;: [
+    { &quot;name&quot;: &quot;Hammer&quot;, &quot;sku&quot;: 738594937 },
+    { },
+    { &quot;name&quot;: &quot;Nail&quot;, &quot;sku&quot;: 284758393, &quot;color&quot;: &quot;gray&quot; }
+  ]
+}
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/" rel="tag">标记语言</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Python标准库: smtplib模块和email模块——邮件发送</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

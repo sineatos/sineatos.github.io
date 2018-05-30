@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Maven学习笔记</title>
+	<meta name="description" content="Maven Study Note">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Maven学习笔记" />
+<meta property="og:description" content="Maven Study Note" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/develop/maven/maven-study-note/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T08:37:25&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T08:37:25&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Maven学习笔记</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T08:37:25">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/java" rel="category">Java</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<h2 id="maven的配置">maven的配置</h2>
+
+<blockquote>
+<ol>
+<li>先下载maven(在maven.apache.org)</li>
+<li>解压、配置环境变量(保证最终path中有指向maven目录中的bin目录)</li>
+<li>验证 cmd —&gt; mvn -v —&gt; 得到系统以及maven、java等信息(如maven的仓库在哪等)</li>
+</ol>
+</blockquote>
+
+<h2 id="maven项目目录结构">maven项目目录结构</h2>
+
+<pre><code>src\
+    |------main\
+            |------java\
+                        |------各种包\
+    |------test\(测试类存放)
+            |------java\
+                        |------各种包\
+    |------resources\(存放资源文件)
+
+pom.xml
+</code></pre>
+
+<h2 id="常用命令">常用命令</h2>
+
+<p>在项目的根目录:</p>
+
+<ol>
+<li><code>mvn -v</code>：   查看maven版本</li>
+<li><code>mvn complie</code>：  对项目进行编译</li>
+<li><code>mvn test</code>： 运行测试</li>
+<li><code>mvn package</code>：  将项目打包成jar包放在target目录中</li>
+<li><code>mvn clean</code>：    删除target文件夹(字节码文件和测试报告)</li>
+<li><code>mvn install</code>：安装jar包到本地仓库中</li>
+<li><code>mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名 -DartifactId=项目名-模块名 -Dversion=版本号 -Dpackage=代码所存在的包名</code>：  在当前目录创建一个新的Maven项目(进入创建的目录以后才有pom.xml等)，如果忽视 <code>archetypeArtifactId</code> 选项，一个巨大的 Maven 模板列表将列出。</li>
+<li><code>mvn dependency:sources -DdownloadSources=true -DdownloadJavadocs=true</code>：    下载依赖</li>
+<li><code>mvn install:install-file -Dfile=c:\kaptcha-{version}.jar -DgroupId=com.google.code -DartifactId=kaptcha -Dversion={version} -Dpackaging=jar</code>： 其中，<code>{version}</code>为需要输入的版本号。</li>
+<li><code>mvn eclipse:eclipse</code>： 创建一个Eclipse项目</li>
+<li><code>mvn site</code>： 进入项目目录运行该命令，可以在target目录创建一个site目录，里面会有项目介绍。</li>
+</ol>
+
+<h2 id="pom-xml">pom.xml</h2>
+
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;    &lt;!-- 约束信息 --&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;    &lt;!-- maven的版本 --&gt;
+  &lt;!– The Basics –&gt;
+  &lt;!-- 坐标信息，由 groupId artifactId version packaging构成 --&gt;
+  &lt;groupId&gt;…&lt;/groupId&gt;    &lt;!-- 项目的包名(反写公司网址+项目名) --&gt;
+  &lt;artifactId&gt;…&lt;/artifactId&gt;    &lt;!-- 项目名+模块名 --&gt;
+  &lt;version&gt;…&lt;/version&gt;            &lt;!-- 项目版本标识(3个数字[大版本号.分支版本号.小版本号]) --&gt;
+  &lt;packaging&gt;…&lt;/packaging&gt;        &lt;!-- 项目的打包方式(jar war zip pom) --&gt;
+  &lt;dependencies&gt;    &lt;!-- 项目的依赖 --&gt;
+          &lt;dependency&gt;    &lt;!-- 依赖项目的信息 --&gt;
+            &lt;!-- 项目坐标 groppId artifactId version 等信息--&gt;
+            &lt;type&gt;&lt;/type&gt;
+            &lt;scope&gt;依赖范围&lt;/scope&gt;
+            &lt;optional&gt;True/False(以来是否可选，默认False)&lt;/optional&gt;
+            &lt;exclusions&gt;
+                &lt;!-- 排除依赖列表 --&gt;
+                &lt;exclusion&gt;&lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;parent&gt;…&lt;/parent&gt;
+  &lt;dependencyManagement&gt;依赖管理
+      &lt;dependencies&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+  &lt;parent&gt;继承的父模块&lt;/parent&gt;
+  &lt;modules&gt;聚合多个maven项目&lt;/modules&gt;
+  &lt;properties&gt;…&lt;/properties&gt;
+  &lt;!– Build Settings –&gt;
+  &lt;build&gt;构建支持
+      &lt;plugins&gt;
+        &lt;plugin&gt;
+            项目坐标
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+  &lt;reporting&gt;…&lt;/reporting&gt;
+  &lt;!– More Project Information –&gt;
+  &lt;nam&gt;项目描述名&lt;/name&gt;
+  &lt;description&gt;项目描述&lt;/description&gt;
+  &lt;url&gt;项目的地址&lt;/url&gt;
+  &lt;inceptionYear&gt;…&lt;/inceptionYear&gt;
+  &lt;licenses&gt;许可证信息&lt;/licenses&gt;
+  &lt;organization&gt;组织信息&lt;/organization&gt;
+  &lt;developers&gt;项目人员列表&lt;/developers&gt;
+  &lt;contributors&gt;…&lt;/contributors&gt;
+  &lt;!– Environment Settings –&gt;
+  &lt;issueManagement&gt;…&lt;/issueManagement&gt;
+  &lt;ciManagement&gt;…&lt;/ciManagement&gt;
+  &lt;mailingLists&gt;…&lt;/mailingLists&gt;
+  &lt;scm&gt;…&lt;/scm&gt;
+  &lt;prerequisites&gt;…&lt;/prerequisites&gt;
+  &lt;repositories&gt;…&lt;/repositories&gt;
+  &lt;pluginRepositories&gt;…&lt;/pluginRepositories&gt;
+  &lt;distributionManagement&gt;…&lt;/distributionManagement&gt;
+  &lt;profiles&gt;…&lt;/profiles&gt;
+&lt;/project&gt;
+</code></pre>
+
+<h2 id="自动创建目录骨架">自动创建目录骨架</h2>
+
+<pre><code>mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名 -DartifactId=项目名-模块名 -Dversion=版本号 -Dpackage=代码所存在的包名
+</code></pre>
+
+<p>或者直接运行<code>mvn archetype:generate</code>，然后逐个设置基本选项(过滤器可以跳过)</p>
+
+<p>从Maven模板创建Web项目</p>
+
+<pre><code>mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名 -DartifactId=项目名-模块名 -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+</code></pre>
+
+<h2 id="maven构件和坐标">maven构件和坐标</h2>
+
+<p>项目基本坐标</p>
+
+<pre><code>groupId    (公司网址的反写+项目名)
+artifactId (项目名-模块名)
+version
+</code></pre>
+
+<p>仓库(管理项目依赖)
+&gt; 1. 本地仓库和远程仓库
+&gt; 2. 本地仓库在本地，本地仓库找不到依赖就会去远程仓库中找依赖，如果还是找不到就会报错
+&gt; 3. 镜像仓库：修改位置: maven —&gt; conf —&gt; setting.xml 146行左右</p>
+
+<pre><code>&lt;localRepository&gt;/path/to/local/repo(本地仓库地址)&lt;/localRepository&gt;
+</code></pre>
+
+<h2 id="maven依赖库查找顺序">Maven依赖库查找顺序</h2>
+
+<ol>
+<li>在 Maven 本地资源库中搜索(在<code>settings.xml</code>中配置)，如果没有找到，进入第 2 步，否则退出。</li>
+<li>在 Maven 中央存储库搜索(在<code>settings.xml</code>中配置)，如果没有找到，进入第 3 步，否则退出。</li>
+<li>在 远程存储库搜索(在<code>pom.xml</code>中配置)，如果没有找到，提示错误信息，否则退出。</li>
+</ol>
+
+<h2 id="在eclipse使用maven">在eclipse使用maven</h2>
+
+<p>可能需要自己安装插件</p>
+
+<h2 id="maven的生命周期">maven的生命周期</h2>
+
+<p><strong>clean</strong>&ndash;&gt;<strong>compile</strong>&ndash;&gt;<strong>test</strong>&ndash;&gt;<strong>package</strong>&ndash;&gt;<strong>install</strong></p>
+
+<blockquote>
+<ol>
+<li>clean 清理项目 [pre-clean clean post-clean]</li>
+<li>default 构建项目 [compile test package install]</li>
+<li>site 生成项目站点 [pre-site(在生成项目站点前要做的工作) site(生成项目的站点文档) post-site(在生成项目站点以后的工作) site-deploy(发布生成站点到服务器上)]</li>
+</ol>
+</blockquote>
+
+<h2 id="依赖的范围-scope">依赖的范围 scope</h2>
+
+<p>详细看官方文档</p>
+
+<p>compile #默认</p>
+
+<h2 id="转换基于maven的java项目支持eclipse-ide">转换基于Maven的Java项目支持Eclipse IDE</h2>
+
+<p>在Maven项目的根目录中执行：<code>mvn eclipse:eclipse</code></p>
+
+<p>注意：一个<code>M2_REPO</code> classpath变量已经生成。对于第一次，要将这个 <code>M2_REPO</code> classpath 变量添加到您的Eclipse IDE中。 否则，Eclipse会在你的导入项目之后引发错误。</p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java/" rel="tag">Java</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/maven/" rel="tag">Maven</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/develop/docker/docker-tutorial/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Docker简单教程</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/develop/maven/maven-build-executable-jar/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Maven构建可执行的jar包(包含依赖jar包)</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

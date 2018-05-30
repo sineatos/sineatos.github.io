@@ -13,10 +13,10 @@
     
     <item>
       <title>Jupyter远程访问设置</title>
-      <link>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</link>
+      <link>https://sineatos.github.io/tools/develop/jupyter/jupyter-remote-visit/</link>
       <pubDate>Wed, 30 May 2018 01:37:44 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</guid>
+      <guid>https://sineatos.github.io/tools/develop/jupyter/jupyter-remote-visit/</guid>
       <description>1. 登录远程服务器 2. 生成配置文件 jupyter notebook --generate-config 3. 生成密码 打开ipython 进行以下操作: In [1]: from notebook.auth import passwd In [2]: passwd() Enter password: Verify password: Out[2]: &#39;sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e&#39; 4. 打开配置文件 # vim ~/.jupyter/jupyter_notebook_config.py # 常用配置 c.NotebookApp.ip=&#39;*&#39;</description>
     </item>
     

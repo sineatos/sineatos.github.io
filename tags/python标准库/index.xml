@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python标准库 on Matrix</title>
+    <link>https://sineatos.github.io/tags/python%E6%A0%87%E5%87%86%E5%BA%93/</link>
+    <description>Recent content in Python标准库 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 15:14:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/python%E6%A0%87%E5%87%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python标准库: smtplib模块和email模块——邮件发送</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/smtplib-and-email/</link>
+      <pubDate>Wed, 30 May 2018 15:14:17 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/smtplib-and-email/</guid>
+      <description>1. smtplib简介 smtplib模块是python中smtp(简单邮件传输协议)的客户端实现。我们可以使用smtplib模块，轻松的发送电</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: abc模块——抽象类和抽象方法的实现</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/abc/</link>
+      <pubDate>Wed, 30 May 2018 15:11:55 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/abc/</guid>
+      <description>基础用法 由于python 没有抽象类、接口的概念，所以要实现这种功能得abc.py 这个类库,具体方式如下 import abc class Foo(metaclass=abc.ABCMeta): ##抽象类 def f1(self): print(123) def f2(self): print(456) @abc.abstractmethod ##抽</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: pickle模块——对象序列化和反序列化</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/pickle/</link>
+      <pubDate>Wed, 30 May 2018 15:09:48 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/pickle/</guid>
+      <description>介绍 在Python2中有pickle模块和cPickle模块，而在Python3中只有pickle模块，其中py2中的pickle模块由py</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: StringIO模块——内存文件</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/stringio/</link>
+      <pubDate>Wed, 30 May 2018 15:07:52 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/stringio/</guid>
+      <description>StringIO的行为与file对象非常像，但它不是磁盘上文件，而是一个内存里的“文件”，我们可以将操作磁盘文件那样来操作StringIO。</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: csv模块——CSV文件的读写</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/csv/</link>
+      <pubDate>Wed, 30 May 2018 15:05:41 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/csv/</guid>
+      <description>CSV简介 CSV(Comma Separated Values，逗号分隔值)也称字符分隔值，因为分隔符可以不是逗号，是一种常用的文本格式，用以存储表格数据，包括数字或者字符。很</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: json模块</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/json/</link>
+      <pubDate>Wed, 30 May 2018 15:01:38 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/json/</guid>
+      <description>主要用到两个函数： 函数名 说明 json.dumps 将 Python 对象编码成 JSON 字符串 json.loads 将已编码的 JSON 字符串解码为 Python 对象 1. json.dumps json.dumps 用于将 Python 对象编码成 JSON 字符串。 语法 json.dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, encoding=&amp;quot;utf-8&amp;quot;,</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: logging模块——日志</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/logging/</link>
+      <pubDate>Wed, 30 May 2018 14:54:39 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/logging/</guid>
+      <description>1. 简单例子 import logging logging.basicConfig(filename = os.path.join(os.getcwd(), &#39;log.txt&#39;), level = logging.DEBUG) logging.debug(&#39;this is a message&#39;) 运行上面例子的代码，将会在程序的根目录下创建一个log.txt文件，打开该文件，里面有一条日志记录： &amp;gt; DEBUG:root:this</description>
+    </item>
+    
+    <item>
+      <title>Python标准库: Python高级数据结构</title>
+      <link>https://sineatos.github.io/tools/programme-language/python/stdlib/advanced-data-structure/</link>
+      <pubDate>Wed, 30 May 2018 14:45:51 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/python/stdlib/advanced-data-structure/</guid>
+      <description>1. collections collections模块包含了内建类型之外的一些有用的工具，例如Counter、defaultdict、OrderedDict、deq</description>
+    </item>
+    
+  </channel>
+</rss>

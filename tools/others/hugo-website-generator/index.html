@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hugo静态网站生成器</title>
+	<meta name="description" content="Hugo Website Generator">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Hugo静态网站生成器" />
+<meta property="og:description" content="Hugo Website Generator" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/others/hugo-website-generator/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T14:40:01&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T14:40:01&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Hugo静态网站生成器</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T14:40:01">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<p>参考：</p>
+
+<ol>
+<li><a href="http://www.gohugo.org/">http://www.gohugo.org/</a></li>
+</ol>
+
+<h2 id="安装">安装</h2>
+
+<ol>
+<li>二进制安装：<a href="https://github.com/spf13/hugo/releases">https://github.com/spf13/hugo/releases</a></li>
+<li>源码安装：去github上面找源码编译</li>
+</ol>
+
+<h2 id="生成站点">生成站点</h2>
+
+<p>使用Hugo快速生成站点，比如希望生成到 <code>/path/to/site</code> 路径：</p>
+
+<pre><code>$ hugo new site /path/to/site
+</code></pre>
+
+<p>这样就在 <code>/path/to/site</code> 目录里生成了初始站点，进去目录：</p>
+
+<pre><code>$ cd /path/to/site
+</code></pre>
+
+<p>站点目录结构：</p>
+
+<pre><code>▸ archetypes/
+▸ content/
+▸ layouts/
+▸ static/
+config.toml
+</code></pre>
+
+<h2 id="创建文章">创建文章</h2>
+
+<p>创建一个 <code>about</code> 页面：</p>
+
+<pre><code>$ hugo new about.md
+</code></pre>
+
+<p><code>about.md</code> 自动生成到了 <code>content/about.md</code> ，打开 <code>about.md</code> 看下：</p>
+
+<pre><code>+++
+date = &quot;2015-10-25T08:36:54-07:00&quot;
+draft = true
+title = &quot;about&quot;
+
++++
+
+正文内容
+</code></pre>
+
+<p>内容是 Markdown 格式的，<code>+++</code> 之间的内容是 <code>TOML</code> 格式的，根据你的喜好，你可以换成 <code>YAML</code> 格式（使用 <code>---</code> 标记）或者 <code>JSON</code> 格式。</p>
+
+<p>创建第一篇文章，放到 <code>post</code> 目录，方便之后生成聚合页面。</p>
+
+<pre><code>$ hugo new post/first.md
+</code></pre>
+
+<p>打开编辑 <code>post/first.md</code> ：</p>
+
+<pre><code>---
+date: &quot;2015-10-25T08:36:54-07:00&quot;
+title: &quot;first&quot;
+ 
+---
+
+### Hello Hugo
+
+ 1. aaa
+ 1. bbb
+ 1. ccc
+</code></pre>
+
+<h2 id="安装皮肤">安装皮肤</h2>
+
+<p>在站点根目录创建目录 <code>themes</code>，在 <code>themes</code> 目录里把皮肤 <code>git clone</code> 下来：</p>
+
+<pre><code># 创建 themes 目录
+$ cd themes
+$ git clone https://github.com/spf13/hyde.git
+</code></pre>
+
+<h2 id="运行hugo">运行Hugo</h2>
+
+<p>在你的站点根目录执行 <code>Hugo</code> 命令进行调试：</p>
+
+<pre><code>$ hugo server --theme=hyde --buildDrafts
+</code></pre>
+
+<p>浏览器里打开： <code>http://localhost:1313</code></p>
+
+<h2 id="部署">部署</h2>
+
+<p>假设你需要部署在 <code>GitHub Pages</code> 上，首先在GitHub上创建一个Repository，命名为：<code>coderzh.github.io</code> （coderzh替换为你的github用户名）。
+在站点根目录执行 Hugo 命令生成最终页面：</p>
+
+<pre><code>$ hugo --theme=hyde --baseUrl=&quot;http://coderzh.github.io/&quot;
+</code></pre>
+
+<p>（注意，以上命令并不会生成草稿页面，如果未生成任何文章，请去掉文章头部的 <code>draft=true</code> 再重新生成。）</p>
+
+<p>如果一切顺利，所有静态页面都会生成到 <code>public</code> 目录，将pubilc目录里所有文件 <code>push</code> 到刚创建的Repository的 master 分支。</p>
+
+<pre><code>$ cd public
+$ git init
+$ git remote add origin https://github.com/coderzh/coderzh.github.io.git
+$ git add -A
+$ git commit -m &quot;first commit&quot;
+$ git push -u origin master
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/hugo/" rel="tag">Hugo</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/javac-introduction/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">java命令: javac</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/python/stdlib/advanced-data-structure/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Python标准库: Python高级数据结构</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

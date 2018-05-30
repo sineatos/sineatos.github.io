@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>java命令: javac</title>
+	<meta name="description" content="Java cli: &#39;javac&#39; Introduction">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="java命令: javac" />
+<meta property="og:description" content="Java cli: &#39;javac&#39; Introduction" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T11:37:09&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T11:37:09&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">java命令: javac</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T11:37:09">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/java" rel="category">Java</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<p>功能：读由java语言编写的类和接口的定义，并将它们编译成字节代码的class文件。javac 可以隐式编译一些没有在命令行中提及的源文件。</p>
+
+<h2 id="1-命令结构">1. 命令结构</h2>
+
+<ul>
+<li><code>javac [ options ] [ sourcefiles ] [ @files ]</code>
+
+<ul>
+<li>参数可按任意次序排列。</li>
+<li><code>options</code> 命令行选项。</li>
+<li><code>sourcefiles</code> 一个或多个要编译的源文件（例如 MyClass.java）。</li>
+</ul></li>
+</ul>
+
+<h2 id="2-将源代码文件名传递给javac的两种方法">2. 将源代码文件名传递给javac的两种方法</h2>
+
+<ol>
+<li>如果源文件数量少,在命令行上列出文件名即可。</li>
+<li>如果源文件数量多，则将源文件名列在一个文件中，名称间用空格或回车行来进行分隔。然后在 <code>javac</code> 命令行中使用该列表文件名，文件名前冠以 <code>@</code> 字符。</li>
+</ol>
+
+<p>源代码文件名称必须含有 <code>.java</code> 后缀，类文件名称必须含有 <code>.class</code> 后缀，源文件和类文件都必须有识别该类的根名。例如，名为 <code>MyClass</code> 的类将写在名为 <code>MyClass.java</code> 的源文件中，并被编译为字节码类文件 <code>MyClass.class</code> 。</p>
+
+<p>内部类定义产生附加的类文件。这些类文件的名称将内部类和外部类的名称结合在一起，例如 <code>MyClass$MyInnerClass.class</code> 。</p>
+
+<p>应当将源文件安排在反映其包树结构的目录树中。例如，如果将所有的源文件放在 <code>/workspace</code> 中，那么 <code>com.mysoft.mypack.MyClass</code> 的代码应该在 <code>\workspace\com\mysoft\mypack\MyClass.java</code> 中。</p>
+
+<p>缺省情况下，编译器将每个类文件与其源文件放在同一目录中。可用 <code>-d</code> 选项指定其它目标目录。</p>
+
+<h3 id="2-1-查找类型">2.1 查找类型</h3>
+
+<p>当编译源文件时，编译器常常需要它还没有识别出的类型的有关信息。对于源文件中使用、扩展或实现的每个类或接口，编译器都需要其类型信息。这包括在源文件中没有明确提及、但通过继承提供信息的类和接口。</p>
+
+<p>例如：当扩展 java.applet.Applet 时还要用到 Applet 的祖先类：java.awt.Panel 、 java.awt.Container、 java.awt.Component 和 java.awt.Object。</p>
+
+<p>当编译器需要类型信息时，它将查找定义类型的源文件或类文件。<strong>编译器先在自举类及扩展类中查找，然后在用户类路径中查找。</strong> ++用户类路径通过两种途径来定义：通过设置 <code>CLASSPATH</code> 环境变量或使用 <code>-classpath</code> 命令行选项。++ 如果使用 <code>-sourcepath</code> 选项，则编译器在 <code>sourcepath</code> 指定的路径中查找源文件；否则，编译器将在用户类路径中查找类文件和源文件。可用 <code>-bootclasspath</code> 和 <code>-extdirs</code>  选项来指定不同的自举类或扩展类。</p>
+
+<p>成功的类型搜索可能生成类文件、源文件或两者兼有。以下是 javac 对各种情形所进行的处理：
+1. 搜索结果只生成类文件而没有源文件： javac 使用类文件。
+2. 搜索结果只生成源文件而没有类文件： javac 编译源文件并使用由此生成的类文件。
+3. 搜索结果既生成源文件又生成类文件： javac 确定类文件是否过时。若类文件已过时，则 javac 重新编译源文件并使用更新后的类文件。否则， javac 直接使用类文件。</p>
+
+<p><strong>注意</strong>：javac 可以隐式编译一些没有在命令行中提及的源文件。用 -verbose 选项可跟踪自动编译。</p>
+
+<h3 id="2-2-文件列表">2.2 文件列表</h3>
+
+<p>为缩短或简化 javac 命令，可以指定一个或多个每行含有一个文件名的文件。在命令行中，采用 &lsquo;@&rsquo; 字符加上文件名的方法将它指定为文件列表。当 javac 遇到以 `@&rsquo; 字符开头的参数时，它对那个文件中所含文件名的操作跟对命令行中文件名的操作是一样的。这使得 Windows 命令行长度不再受限制。</p>
+
+<h2 id="3-选项">3. 选项</h2>
+
+<p>编译器有一批标准选项，目前的开发环境支持这些标准选项，将来的版本也将支持它。还有一批附加的非标准选项是目前的虚拟机实现所特有的，将来可能要有变化。非标准选项以 <code>-X</code> 打头。</p>
+
+<h3 id="3-1-标准选项">3.1 标准选项</h3>
+
+<h4 id="classpath-类路径">-classpath 类路径</h4>
+
+<p>设置用户类的路径，它会覆盖 <code>CLASSPATH</code> 环境变量中的用户类路径。若既未指定 <code>CLASSPATH</code> 又未指定 <code>-classpath</code> ，则用户类路径由当前目录构成。有关详细信息，请参阅设置类路径。</p>
+
+<h4 id="d-目录">-d 目录</h4>
+
+<p>设置输出类文件的位置。如果某个类是一个包的组成部分，则 <code>javac</code> 将把该类文件放入反映包名的子目录中，必要时创建目录。例如，如果指定 <code>-d c:\myclasses</code> 并且该类名叫 <code>com.mypackage.MyClass</code>，那么类文件就叫作 <code>c:\myclasses\com\mypackage\MyClass.class</code>。</p>
+
+<p>若未指定 <code>-d</code> 选项，则 <code>javac</code> 将把类文件放到与源文件相同的目录中。</p>
+
+<p>注意： <code>-d</code> 选项指定的目录不会被自动添加到用户类路径中。</p>
+
+<h4 id="deprecation">-deprecation</h4>
+
+<p>显示每种不鼓励使用的API（包含成员和类）的使用或覆盖情况说明。没有给出 <code>-deprecation</code> 选项的话， javac 将显示这类源文件的名称：这些源文件使用或覆盖了不鼓励使用的API。</p>
+
+<h4 id="encoding">-encoding</h4>
+
+<p>设置源文件编码名称，例如 EUCJIS/SJIS。若未指定 <code>-encoding</code> 选项，则使用平台缺省的转换器。在windows dos环境下编译NetBeans建立的源文件需要加上参数 <code>-encoding utf-8</code>。</p>
+
+<h4 id="g">-g</h4>
+
+<p>生成所有的调试信息，包括局部变量。缺省情况下，只生成行号和源文件信息。</p>
+
+<h4 id="g-none">-g:none</h4>
+
+<p>不生成任何调试信息。</p>
+
+<h4 id="g-关键字列表">-g:{关键字列表}</h4>
+
+<p>只生成某些类型的调试信息，这些类型由逗号分隔的关键字列表所指定。有效的关键字有：</p>
+
+<ol>
+<li>source 源文件调试信息</li>
+<li>lines 行号调试信息</li>
+<li>vars 局部变量调试信息</li>
+<li>-nowarn 禁用警告信息。</li>
+</ol>
+
+<h4 id="o">-O</h4>
+
+<p>优化代码，缩短执行时间。使用 <code>-O</code> 选项可能使编译速度下降，生成更大的类文件并使程序难以调试。</p>
+
+<h4 id="sourcepath-源路径">-sourcepath 源路径</h4>
+
+<p>指定用来查找类或接口定义的源代码路径。与用户类路径一样，多个源路径项用分号 “ <code>;</code> ” 进行分隔，它们可以是<strong>目录、JAR 归档文件或 ZIP 归档文件。</strong> 如果使用包，那么目录或归档文件中的本地路径名必须反映包名。（注意：通过类路径查找的类，如果找到了其源文件，则可能会自动被重新编译。）</p>
+
+<h4 id="verbose">-verbose</h4>
+
+<p>冗长输出。它包括了每个所加载的类和每个所编译的源文件的有关信息。</p>
+
+<h2 id="4-总结">4. 总结</h2>
+
+<ol>
+<li>何时需要使用 -classpath：当你要编译或执行的类引用了其它的类，但被引用类的 .class 文件不在当前目录下时，就需要通过 -classpath 来引入类</li>
+<li>何时需要指定路径：当你要编译的类所在的目录和你执行 javac 命令的目录不是同一个目录时，就需要指定源文件的路径(CLASSPATH 是用来指定 .class 路径的，不是用来指定 .java 文件的路径的)</li>
+</ol>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java%E5%91%BD%E4%BB%A4/" rel="tag">Java命令</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/java-introduction/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">java命令: java</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/others/hugo-website-generator/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Hugo静态网站生成器</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

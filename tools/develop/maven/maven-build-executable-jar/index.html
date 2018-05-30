@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Maven构建可执行的jar包(包含依赖jar包)</title>
+	<meta name="description" content="Maven Build Executable Jar">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Maven构建可执行的jar包(包含依赖jar包)" />
+<meta property="og:description" content="Maven Build Executable Jar" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/develop/maven/maven-build-executable-jar/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T08:42:35&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T08:42:35&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Maven构建可执行的jar包(包含依赖jar包)</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T08:42:35">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/java" rel="category">Java</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<ul>
+<li><strong>目标</strong>：将依赖的第三方jar包打进去</li>
+<li><strong>方法</strong>：maven-assembly-plugin</li>
+</ul>
+
+<p>遇到过的坑：</p>
+
+<ol>
+<li>修改完pom.xml后，不生效。
+
+<ul>
+<li>改pom.xml后，代码不生效，是因为对IDEA工具不熟，在修改完xml后，需要点工具右下角的import changes或者直接点auto-import就可以一劳永逸了(即更新依赖)。</li>
+</ul></li>
+<li>生成jar后，idea可以执行，但是java -jar无法执行，报错Exception in thread &ldquo;main&rdquo; java.lang.NoClassDefFoundError。
+
+<ul>
+<li>如果修改pom.xml中的mainClass生效了，说不定是mainClass传入的不对，使用<code>mvn exec:java -Dexec.mainClass=&quot;com.delon.main.Test&quot;</code>可以尝试main方法是否正确。</li>
+<li>如果想用编译Test.java文件，可以使用<code>mvn clean compile exec:java -Dexec.mainClass=&quot;com.delon.main.Test&quot;</code>。</li>
+</ul></li>
+<li>生成jar后，idea可以执行，java -jar也可以执行，但是缺少相关依赖，报错<code>Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: okhttp3/RequestBody</code>
+
+<ul>
+<li>参考如下解决方式即可。</li>
+</ul></li>
+</ol>
+
+<h2 id="maven构建jar包的步骤">maven构建jar包的步骤</h2>
+
+<ol>
+<li>执行可执行的class，代码内需要有入口main方法</li>
+<li>通过<code>mvn package</code>来构建jar包</li>
+<li>使用<code>java -jar test.jar</code>来执行jar包</li>
+</ol>
+
+<h2 id="1-包含依赖jar包">1. 包含依赖jar包</h2>
+
+<p>maven的pom.xml配置文件</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.xxx.delon&lt;/groupId&gt;
+    &lt;artifactId&gt;bugly&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    
+    &lt;dependencies&gt;
+　　　　&lt;!-- 工程所需jar包引用开始 --&gt;
+        &lt;!-- 单元测试 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.7&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 代码所需依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;
+            &lt;artifactId&gt;okhttp&lt;/artifactId&gt;
+            &lt;version&gt;3.3.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 代码所需依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;2.2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 工程所需jar包引用开始 --&gt;
+    &lt;/dependencies&gt;
+
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+
+            &lt;plugin&gt;
+                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;appendAssemblyId&gt;false&lt;/appendAssemblyId&gt;
+                    &lt;descriptorRefs&gt;
+                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+                    &lt;/descriptorRefs&gt;
+                    &lt;archive&gt;
+                        &lt;manifest&gt;
+                            &lt;!-- 此处指定main方法入口的class --&gt;
+                            &lt;mainClass&gt;com.xxx.uploadFile&lt;/mainClass&gt;
+                        &lt;/manifest&gt;
+                    &lt;/archive&gt;
+               ta &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;make-assembly&lt;/id&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;assembly&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+</code></pre>
+
+<p>生成jar包，会生成在target目录下</p>
+
+<pre><code>mvn package
+</code></pre>
+
+<p>解压缩bugly-1.0-SNAPSHOT.jar-&gt;META-INF-&gt;MANIFEST.MF</p>
+
+<pre><code>Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: delon
+Build-Jdk: 1.8.0_112
+Main-Class: com.xxx.uploadFile
+</code></pre>
+
+<p>执行：</p>
+
+<pre><code># 运行jar
+java -jar test.jar
+</code></pre>
+
+<p>也可以通过如下命令</p>
+
+<pre><code>mvn assembly:assembly
+
+#或跳过测试 
+mvn -Dmaven.test.skip=true  assembly:assembly
+</code></pre>
+
+<p>如果上面的命令成功执行，那么在项目路径的target文件下就会有两个jar文件，一个是有jar包依赖的，一个是没jar包依赖的。</p>
+
+<h2 id="2-不包含依赖jar包">2. 不包含依赖jar包</h2>
+
+<p>如果不想包含依赖的jar包，可以把<build>里面的代码替换成如下代码：</p>
+
+<pre><code>&lt;!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 --&gt;  
+            &lt;plugin&gt;  
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;  
+                &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;  
+                &lt;configuration&gt;  
+                    &lt;archive&gt;  
+                        &lt;manifest&gt;  
+                            &lt;addClasspath&gt;true&lt;/addClasspath&gt;  
+                            &lt;classpathPrefix&gt;lib/&lt;/classpathPrefix&gt;  
+                            &lt;mainClass&gt;com.xxx.uploadFile&lt;/mainClass&gt;  
+                        &lt;/manifest&gt;  
+                    &lt;/archive&gt;  
+                &lt;/configuration&gt;  
+            &lt;/plugin&gt;  
+            &lt;!-- 拷贝依赖的jar包到lib目录 --&gt;  
+            &lt;plugin&gt;  
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;  
+                &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;  
+                &lt;executions&gt;  
+                    &lt;execution&gt;  
+                        &lt;id&gt;copy&lt;/id&gt;  
+                        &lt;phase&gt;package&lt;/phase&gt;  
+                        &lt;goals&gt;  
+                            &lt;goal&gt;copy-dependencies&lt;/goal&gt;  
+                        &lt;/goals&gt;  
+                        &lt;configuration&gt;  
+                            &lt;outputDirectory&gt;  
+                                ${project.build.directory}/lib  
+                            &lt;/outputDirectory&gt;  
+                        &lt;/configuration&gt;  
+                    &lt;/execution&gt;  
+                &lt;/executions&gt;  
+            &lt;/plugin&gt;  
+</code></pre>
+
+<h2 id="3-只包含部分依赖jar包">3. 只包含部分依赖jar包</h2>
+
+<p>如果想只包含部分依赖jar包</p>
+
+<p>比如说，想做一个工具jar包，依赖公共jar和自己本地jar包，本地jar包需要解压成class打到jar包内，而依赖的公共jar包则不需要。</p>
+
+<p>剔除公共jar包 可以用<code>&lt;scope&gt;</code></p>
+
+<p><code>&lt;scope&gt;</code>的值的含义：
+- compile，缺省值，适用于所有阶段，会随着项目一起发布。
+- provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar。
+- runtime，只在运行时使用，如JDBC驱动，适用运行和测试阶段。
+- test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。
+- system，类似provided，需要显式提供包含依赖的jar，Maven不会在Repository中查找它。</p>
+
+<p>编译的时候采用 compile</p>
+
+<pre><code>&lt;dependency&gt;
+     &lt;groupId&gt;log4j&lt;/groupId&gt;
+     &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+     &lt;version&gt;1.2.17&lt;/version&gt;
+     &lt;scope&gt;complie&lt;/scope&gt;
+     &lt;optional&gt;true&lt;/optional&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>在用package打包的时候，改成test，生成的jar包里就不会有该jar包的类了。</p>
+
+<pre><code>&lt;dependency&gt;
+     &lt;groupId&gt;log4j&lt;/groupId&gt;
+     &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+     &lt;version&gt;1.2.17&lt;/version&gt;
+     &lt;scope&gt;test&lt;/scope&gt;
+     &lt;optional&gt;true&lt;/optional&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>build配置项，mainClass为空因为不是可执行jar。</p>
+
+<pre><code>&lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;descriptorRefs&gt;
+                        &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+                    &lt;/descriptorRefs&gt;
+                    &lt;archive&gt;
+                        &lt;manifest&gt;
+                            &lt;mainClass&gt;&lt;/mainClass&gt;
+                        &lt;/manifest&gt;
+                    &lt;/archive&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;make-assembly&lt;/id&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;single&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java/" rel="tag">Java</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/maven/" rel="tag">Maven</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/develop/maven/maven-study-note/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Maven学习笔记</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/develop/maven/maven-build-life-cycle/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Maven构建生命周期</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

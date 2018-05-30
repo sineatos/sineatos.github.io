@@ -13,10 +13,10 @@
     
     <item>
       <title>Docker简单教程</title>
-      <link>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</link>
+      <link>https://sineatos.github.io/tools/develop/docker/docker-tutorial/</link>
       <pubDate>Wed, 30 May 2018 08:33:04 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</guid>
+      <guid>https://sineatos.github.io/tools/develop/docker/docker-tutorial/</guid>
       <description>1. 安装 Docker 要求 Ubuntu 系统的内核版本高于 3.10，且为64位机器 在linux下安装： sudo apt-get install docker sudo apt-get install docker.io 或者安装最新版： wget -qO- https://get.docker.com/ | sh 安装完以后运行： sudo service docker</description>
     </item>
     

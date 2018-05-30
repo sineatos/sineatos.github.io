@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java命令 on Matrix</title>
+    <link>https://sineatos.github.io/tags/java%E5%91%BD%E4%BB%A4/</link>
+    <description>Recent content in Java命令 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 11:37:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/java%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>java命令: javac</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:37:09 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/javac-introduction/</guid>
+      <description>功能：读由java语言编写的类和接口的定义，并将它们编译成字节代码的class文件。javac 可以隐式编译一些没有在命令行中提及的源文件。 1.</description>
+    </item>
+    
+    <item>
+      <title>java命令: java</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:33:07 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/</guid>
+      <description>1. 查看参数列表 java: 基本参数列表 java -X: 得到扩展参数列表。 2. 基本参数说明 -client, -server 这两个参数用于设置虚拟机使用何种运行模式，client模式启动比较快，但</description>
+    </item>
+    
+    <item>
+      <title>java命令: jar</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</link>
+      <pubDate>Wed, 30 May 2018 11:29:45 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/jar-introduction/</guid>
+      <description>JAR包是Java中所特有一种压缩文档,可以把它理解为.zip包。当然也有区别,JAR包中有一个META-INF\MANIFEST.MF文件</description>
+    </item>
+    
+    <item>
+      <title>Java常用命令行工具</title>
+      <link>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</link>
+      <pubDate>Wed, 30 May 2018 11:26:57 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/java/cli-tools/java-common-cli/</guid>
+      <description>jps : 虚拟机进程状况工具 参数 说明 -q 只输出LVMID，同进程pid -m 输出JVM启动时传给主类main()的参数。 -l 输出主类全名。如果进程执行的是</description>
+    </item>
+    
+  </channel>
+</rss>

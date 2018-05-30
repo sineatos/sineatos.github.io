@@ -13,28 +13,28 @@
     
     <item>
       <title>Vim常用插件</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-common-plugins/</link>
       <pubDate>Wed, 30 May 2018 08:55:39 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-common-plugins/</guid>
       <description>记录一些我自己正在使用的Vim插件。 插件收集：https://vimawesome.com 对于需要python或者lua支持的vim，可以考</description>
     </item>
     
     <item>
       <title>Vim Buffer</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-buffer/</link>
       <pubDate>Wed, 30 May 2018 08:53:16 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-buffer/</guid>
       <description>参考： http://ju.outofmemory.cn/entry/102211 https://blog.csdn.net/Poechant/article/details/7216168 https://blog.csdn.net/chienchia/article/details/32123297 Buffer是内存中的一块缓冲区域，用于临时存放Vim打开过的文件。用Vim打开文件后，文件就自动被加入到Buffer队列中，而</description>
     </item>
     
     <item>
       <title>Vim学习笔记</title>
-      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</link>
+      <link>https://sineatos.github.io/tools/develop/vim/vim-study-note/</link>
       <pubDate>Wed, 30 May 2018 08:50:35 +0800</pubDate>
       
-      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</guid>
+      <guid>https://sineatos.github.io/tools/develop/vim/vim-study-note/</guid>
       <description>参考: http://easwy.com/blog/archives/advanced-vim-skills-catalog/ http://www.atool.org/vim.php 除了简单的移动光标、编辑功能以及查找以外，还需要先掌握的： 分割窗口 移动窗口 编辑多个文件 移动以及编辑 hjkl : 左下上右 uiop : 撤销 插入 从下行开</description>
     </item>
     

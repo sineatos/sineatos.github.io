@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>java命令: java</title>
+	<meta name="description" content="Java cli: &#39;java&#39; Introduction">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="java命令: java" />
+<meta property="og:description" content="Java cli: &#39;java&#39; Introduction" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/java/cli-tools/java-introduction/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T11:33:07&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T11:33:07&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">java命令: java</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T11:33:07">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/java" rel="category">Java</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<h2 id="1-查看参数列表">1. 查看参数列表</h2>
+
+<ol>
+<li><code>java</code>: 基本参数列表</li>
+<li><code>java -X</code>: 得到扩展参数列表。</li>
+</ol>
+
+<h2 id="2-基本参数说明">2. 基本参数说明</h2>
+
+<h3 id="client-server">-client, -server</h3>
+
+<p>这两个参数用于设置虚拟机使用何种运行模式，client模式启动比较快，但运行时性能和内存管理效率不如server模式，通常用于客户端应用程序。相反，server模式启动比client慢，但可获得更高的运行性能。
+在 windows上，缺省的虚拟机类型为client模式，如果要使用 server模式，就需要在启动虚拟机时加-server参数，以获得更高性能，对服务器端应用，推荐采用server模式，尤其是多个CPU的系统。在 Linux，Solaris上缺省采用server模式。</p>
+
+<h3 id="classpath-cp">-classpath, -cp</h3>
+
+<p>虚拟机在运行一个类时，需要将其装入内存，虚拟机搜索类的方式和顺序如下：
+<code>Bootstrap classes</code> -&gt; <code>Extension classes</code> -&gt; <code>User classes</code></p>
+
+<ol>
+<li><code>Bootstrap</code> 中的路径是虚拟机自带的jar或zip文件，虚拟机首先搜索这些包文件，用 <code>System.getProperty(&quot;sun.boot.class.path&quot;)</code> 可得到虚拟机搜索的包名。</li>
+<li><code>Extension</code> 是位于 <code>jre/lib/ext</code> 目录下的jar文件，虚拟机在搜索完 <code>Bootstrap</code> 后就搜索该目录下的jar文件。用 <code>System. getProperty(&quot;java.ext.dirs&quot;)</code> 可得到虚拟机使用 <code>Extension</code> 搜索路径。</li>
+<li><code>User classes</code> 搜索顺序为<code>当前目录</code>、<code>环境变量 CLASSPATH</code>、<code>-classpath</code>。</li>
+</ol>
+
+<h4 id="classpath">-classpath</h4>
+
+<p>告知虚拟机搜索<code>目录名</code>、<code>jar文档名</code>、<code>zip文档名</code>，之间用分号<code>;</code>分隔。</p>
+
+<p>例如当你自己开发了公共类并包装成一个<code>common.jar</code>包，在使用 <code>common.jar</code> 中的类时，就需要用 <code>-classpath common.jar</code> 告诉虚拟机从<code>common.jar</code>中查找该类，否则虚拟机就会抛出<code>java.lang.NoClassDefFoundError</code>异常，表明未找到类定义。
+在运行时可用<code>System.getProperty(&quot;java.class.path&quot;)</code>得到虚拟机查找类的路径。</p>
+
+<p>使用<code>-classpath</code>后虚拟机将不再使用<code>CLASSPATH</code>中的类搜索路径，如果<code>-classpath</code>和<code>CLASSPATH</code>都没有设置，则虚拟机使用当前路径(.)作为类搜索路径。</p>
+
+<p>推荐使用<code>-classpath</code>来定义虚拟机要搜索的类路径，而不要使用环境变量<code>CLASSPATH</code>的搜索路径，以减少多个项目同时使用<code>CLASSPATH</code>时存在的潜在冲突。</p>
+
+<h3 id="d-propertyname-value">-D<propertyName>=value</h3>
+
+<ul>
+<li>在虚拟机的系统属性中设置属性名/值对，运行在此虚拟机之上的应用程序可用<code>System.getProperty(&quot;propertyName&quot;)</code>得到<code>value</code>的值。</li>
+<li>如果<code>value</code>中有空格，则需要用双引号将该值括起来，如<code>-Dname=&quot;space string&quot;</code>。</li>
+<li>该参数通常用于设置系统级全局变量值，如配置文件路径，应为该属性在程序中任何地方都可访问。</li>
+</ul>
+
+<h3 id="verbose-class-gc-jni">-verbose[:class|gc|jni]</h3>
+
+<p>在输出设备上显示虚拟机运行信息。
+- <code>verbose</code>和<code>verbose:class</code>含义相同，输出虚拟机装入的类的信息，显示的信息格式如下：
+    <code>
+    [Loaded java.io.FilePermission$1 from shared objects file]
+</code>
+- 当虚拟机报告类找不到或类冲突时可用此参数来诊断来查看虚拟机从装入类的情况。</p>
+
+<h4 id="verbose-gc">-verbose:gc</h4>
+
+<p>在虚拟机发生内存回收时在输出设备显示信息，格式如下：</p>
+
+<pre><code>[Full GC 268K-&gt;168K(1984K), 0.0187390 secs]
+</code></pre>
+
+<p>该参数用来监视虚拟机内存回收的情况。</p>
+
+<h4 id="verbose-jni">-verbose:jni</h4>
+
+<p>在虚拟机调用native方法时输出设备显示信息，格式如下：</p>
+
+<pre><code>[Dynamic-linking native method HelloNative.sum ... JNI]
+</code></pre>
+
+<p>该参数用来监视虚拟机调用本地方法的情况，在发生jni错误时可为诊断提供便利。</p>
+
+<h3 id="version">-version</h3>
+
+<p>显示可运行的虚拟机版本信息然后退出。一台机器上装有不同版本的JDK时</p>
+
+<h3 id="showversion">-showversion</h3>
+
+<p>显示版本信息以及帮助信息。</p>
+
+<h3 id="ea-packagename-classname">-ea[:<packagename>&hellip;|:<classname>]</h3>
+
+<h3 id="enableassertions-packagename-classname">-enableassertions[:<packagename>&hellip;|:<classname>]</h3>
+
+<p>从JDK1.4开始，java可支持断言机制，用于诊断运行时问题。通常在测试阶段使断言有效，在正式运行时不需要运行断言。断言后的表达式的值是一个逻辑值，为true时断言不运行，为false时断言运行，抛出<code>java.lang.AssertionError</code>错误。</p>
+
+<p>上述参数就用来设置虚拟机是否启动断言机制，缺省时虚拟机关闭断言机制，用<code>-ea</code> 可打开断言机制，不加<code>&lt;packagename&gt;</code>和<code>classname</code>时运行所有包和类中的断言，如果希望只运行某些包或类中的断言，可将包名或类名加到<code>-ea</code>之后。例如要启动包<code>com.foo.util</code>中的断言，可用命令 <code>–ea:com.foo.util</code> 。</p>
+
+<h3 id="da-packagename-classname">-da[:<packagename>&hellip;|:<classname>]</h3>
+
+<h3 id="disableassertions-packagename-classname">-disableassertions[:<packagename>&hellip;|:<classname>]</h3>
+
+<p>用来设置虚拟机关闭断言处理，<code>packagename</code>和<code>classname</code>的使用方法和<code>-ea</code>相同。</p>
+
+<h3 id="esa-enablesystemassertions">-esa | -enablesystemassertions</h3>
+
+<p>设置虚拟机显示系统类的断言。</p>
+
+<h3 id="dsa-disablesystemassertions">-dsa | -disablesystemassertions</h3>
+
+<p>设置虚拟机关闭系统类的断言。</p>
+
+<h3 id="agentlib-libname-options">-agentlib:<libname>[=<options>]</h3>
+
+<p>该参数是JDK5新引入的，用于虚拟机装载本地代理库。</p>
+
+<p><code>libname</code> 为本地代理库文件名，虚拟机的搜索路径为环境变量<code>PATH</code>中的路径，<code>options</code>为传给本地库启动时的参数，多个参数之间用逗号分隔。在Windows 平台上虚拟机搜索本地库名为<code>libname.dll</code>的文件，在Unix上虚拟机搜索本地库名为<code>libname.so</code>的文件，搜索路径环境变量在不同系统上有所不同，Linux、SunOS、IRIX上为LD_LIBRARY_PATH，AIX上为LIBPATH，HP-UX上为SHLIB_PATH。</p>
+
+<p>例如可使用<code>-agentlib:hprof</code>来获取虚拟机的运行情况，包括CPU、内存、线程等的运行数据，并可输出到指定文件中，可用<code>-agentlib:hprof=help</code>来得到使用帮助列表。在jre&rdquo;bin目录下可发现hprof.dll文件。</p>
+
+<h3 id="agentpath-pathname-options">-agentpath:<pathname>[=<options>]</h3>
+
+<p>设置虚拟机按全路径装载本地库，不再搜索PATH中的路径。其他功能和<code>agentlib</code>相同。</p>
+
+<h3 id="javaagent-jarpath-options">-javaagent:<jarpath>[=<options>]</h3>
+
+<p>虚拟机启动时装入java语言设备代理。jarpath文件中的mainfest 文件必须有Agent-Class属性。代理类要实现<code>public static void premain(String agentArgs, Instrumentation inst)</code>方法。当虚拟机初始化时，将按代理类的说明顺序调用premain方法。
+参见：<code>java.lang.instrument</code></p>
+
+<h2 id="3-扩展参数说明">3. 扩展参数说明</h2>
+
+<h3 id="xmixed">-Xmixed</h3>
+
+<p>设置<code>-client</code>模式虚拟机对使用频率高的方式进行Just-In-Time编译和执行，对其他方法使用解释方式执行。该方式是虚拟机缺省模式。</p>
+
+<h3 id="xint">-Xint</h3>
+
+<p>设置<code>-client</code>模式下运行的虚拟机以解释方式执行类的字节码，不将字节码编译为本机码。</p>
+
+<h3 id="xbootclasspath-path-xbootclasspath-a-path-xbootclasspath-p-path">-Xbootclasspath:path, -Xbootclasspath/a:path, -Xbootclasspath/p:path</h3>
+
+<ul>
+<li>改变虚拟机装载缺省系统运行包<code>rt.jar</code>而从<code>-Xbootclasspath</code>中设定的搜索路径中装载系统运行类。除非你自己能写一个运行时，否则不会用到该参数。</li>
+<li><code>/a</code>: 将在缺省搜索路径后加上path 中的搜索路径。</li>
+<li><code>/p</code>: 在缺省搜索路径前先搜索path中的搜索路径。</li>
+</ul>
+
+<h3 id="xnoclassgc">-Xnoclassgc</h3>
+
+<p>关闭虚拟机对class的垃圾回收功能。</p>
+
+<h3 id="xincgc">-Xincgc</h3>
+
+<p>启动增量垃圾收集器，缺省是关闭的。增量垃圾收集器能减少偶然发生的长时间的垃圾回收造成的暂停时间。但增量垃圾收集器和应用程序并发执行，因此会占用部分CPU在应用程序上的功能。</p>
+
+<h3 id="xloggc-file">-Xloggc:<file></h3>
+
+<p>将虚拟机每次垃圾回收的信息写到日志文件中，文件名由file指定，文件格式是平文件，内容和<code>-verbose:gc</code>输出内容相同。</p>
+
+<h3 id="xbatch">-Xbatch</h3>
+
+<p>虚拟机的缺省运行方式是在后台编译类代码，然后在前台执行代码，使用<code>-Xbatch</code>参数将关闭虚拟机后台编译，在前台编译完成后再执行。</p>
+
+<h3 id="xms-size">-Xms<size></h3>
+
+<p>设置虚拟机可用内存堆的初始大小，缺省单位为字节，该大小为1024的整数倍并且要大于1MB，可用k(K)或m(M)为单位来设置较大的内存数。初始堆大小为2MB。
+例如：-Xms6400K，-Xms256M</p>
+
+<h3 id="xmx-size">-Xmx<size></h3>
+
+<p>设置虚拟机内存堆的最大可用大小，缺省单位为字节。该值必须为1024整数倍，并且要大于2MB。可用k(K)或m(M)为单位来设置较大的内存数。缺省堆最大值为64MB。
+例如：-Xmx81920K，-Xmx80M
+当应用程序申请了大内存运行时虚拟机抛出<code>java.lang.OutOfMemoryError: Java heap space</code>错误，就需要使用-Xmx设置内存。</p>
+
+<h3 id="xss-size">-Xss<size></h3>
+
+<p>设置线程栈的大小，缺省单位为字节。与<code>-Xmx</code>类似，也可用K或M来设置较大的值。通常操作系统分配给线程栈的缺省大小为1MB。
+另外也可在java中创建线程对象时设置栈的大小，构造函数原型为Thread(ThreadGroup group, Runnable target, String name, long stackSize)。</p>
+
+<h3 id="xprof">-Xprof</h3>
+
+<p>输出CPU运行时的诊断信息。</p>
+
+<h3 id="xfuture">-Xfuture</h3>
+
+<p>对类文件进行严格格式检查，以保证类代码符合类代码规范。为保持向后兼容，虚拟机缺省不进行严格的格式检查。</p>
+
+<h3 id="xrs">-Xrs</h3>
+
+<p>减少虚拟机中操作系统的信号（singals）的使用。该参数通常用在虚拟机以后台服务方式运行时使用（如Servlet）。</p>
+
+<h3 id="xcheck-jni">-Xcheck:jni</h3>
+
+<h2 id="4-运行">4. 运行</h2>
+
+<h3 id="4-1-运行class文件">4.1 运行class文件</h3>
+
+<ol>
+<li><p>执行带main方法的class文件，命令行为：</p>
+
+<pre><code>java &lt;CLASS文件名&gt;
+</code></pre>
+
+<p><strong>注意：CLASS文件名不要带文件后缀.class</strong></p>
+
+<p>例如：<code>java Test</code></p></li>
+
+<li><p>如果执行的class文件是带包的，即在类文件中使用了：</p>
+
+<pre><code>package &lt;包名&gt;
+</code></pre>
+
+<p>那应该在包的基路径下执行，命令行为：</p>
+
+<pre><code>java &lt;包名&gt;.CLASS文件名
+</code></pre>
+
+<p>例如：<code>PackageTest.java</code>中，其包名为：<code>com.ee2ee.test</code>，对应的语句为：
+<code>package com.ee2ee.test;</code>
+<code>PackageTest.java</code>及编译后的class文件PackageTest.class的存放目录如下：</p>
+
+<pre><code>classes
+    |__com
+        |__ee2ee
+            |__test
+                |__PackageTest.java
+                |__PackageTest.class
+</code></pre>
+
+<p>要运行PackageTest.class，应在classes目录下执行：
+<code>java com.ee2ee.test.PackageTest</code></p></li>
+</ol>
+
+<h3 id="4-2-运行jar文件中的class">4.2 运行jar文件中的class</h3>
+
+<p>原理和运行class文件一样，只需加上参数<code>-cp &lt;jar文件名&gt;</code>即可。
+例如：执行<code>test.jar</code>中的类<code>com.ee2ee.test.PackageTest</code>，命令行如下：</p>
+
+<pre><code>java -cp test.jar com.ee2ee.test.PackageTest 
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/java%E5%91%BD%E4%BB%A4/" rel="tag">Java命令</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/jar-introduction/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">java命令: jar</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/java/cli-tools/javac-introduction/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">java命令: javac</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/others/toml/">TOML简介</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/smtplib-and-email/">Python标准库: smtplib模块和email模块——邮件发送</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/abc/">Python标准库: abc模块——抽象类和抽象方法的实现</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/pickle/">Python标准库: pickle模块——对象序列化和反序列化</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/python/stdlib/stringio/">Python标准库: StringIO模块——内存文件</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>
