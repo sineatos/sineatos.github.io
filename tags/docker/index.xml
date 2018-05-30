@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Matrix</title>
+    <link>https://sineatos.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 08:33:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker简单教程</title>
+      <link>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</link>
+      <pubDate>Wed, 30 May 2018 08:33:04 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</guid>
+      <description>1. 安装 Docker 要求 Ubuntu 系统的内核版本高于 3.10，且为64位机器 在linux下安装： sudo apt-get install docker sudo apt-get install docker.io 或者安装最新版： wget -qO- https://get.docker.com/ | sh 安装完以后运行： sudo service docker</description>
+    </item>
+    
+  </channel>
+</rss>

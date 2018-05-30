@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>IPython学习笔记</title>
+	<meta name="description" content="IPython Study Note">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="IPython学习笔记" />
+<meta property="og:description" content="IPython Study Note" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tech/tools/develop/jupyter/ipython-study-note/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T01:29:38&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T01:29:38&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">IPython学习笔记</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T01:29:38">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e7%a7%91%e7%a0%94" rel="category">科研</a>, <a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160320001911912-1441947012.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160320001911912-1441947012.png" /></p>
+
+<h2 id="安装与运行">安装与运行</h2>
+
+<p>参考<a href="http://www.cnblogs.com/zzhzhao/p/5295476.html">http://www.cnblogs.com/zzhzhao/p/5295476.html</a>
+安装ipython用pip即可(<code>pip install ipython</code>或<code>pip install jupyter</code>)
+打开终端或者命令行，输出命令ipython启动IPython</p>
+
+<hr />
+
+<h2 id="tab键自动完成">Tab键自动完成</h2>
+
+<p>在shell中输入表达式时，只要按下<code>Tab</code>键，当前命令控件中任何与输入的字符串相匹配的变量（对象、函数等）就会被找出来。(如果没有自动完成的功能，可以使用<code>pip install pyreadline</code>解决)</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319153731428-1661086138.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319153731428-1661086138.png" /></p>
+
+<hr />
+
+<h2 id="内省">内省</h2>
+
+<p>在变量的前面或后面加上一个问号(<code>?</code>)就可以将有关该对象的一些通用信息显示出来。这就叫做对象的内省。</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319154100443-507804512.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319154100443-507804512.png" /></p>
+
+<p>如果对象是一个函数或实例方法，则其docstring也会被现实出来。</p>
+
+<p>使用??还将显示出该函数的源代码。</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319155043428-1230534589.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319155043428-1230534589.png" /></p>
+
+<p>一些字符串配以通配符(<code>*</code>)即可显示出所有与该通配符表达式相匹配的名称。</p>
+
+<p>例如，我们可以列出Numpy顶级命名空间中含有“load”的所有函数</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319155458084-301637789.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319155458084-301637789.png" /></p>
+
+<hr />
+
+<h2 id="run命令">%run命令</h2>
+
+<p>在ipython会话环境中，所有文件都可以通过<code>%run</code>命令当做Python程序来运行。</p>
+
+<p>输入<code>%run /workspace/file.py</code>即可。</p>
+
+<hr />
+
+<h2 id="中断正在执行的代码">中断正在执行的代码</h2>
+
+<p>按下<code>Ctrl-C</code>就会引发一个KeyboardInterrupt。除了一些非常特殊的情况下，绝大部分python程序都会立即停止执行</p>
+
+<hr />
+
+<h2 id="执行剪贴板中的代码">执行剪贴板中的代码</h2>
+
+<p>书上说使用<code>ctrl+shift+v</code>将剪贴板的代码片段粘贴出来，然而windows系统似乎不可行，所以鼠标右键粘贴好了。</p>
+
+<p><code>%paste</code>可以承载剪贴板中的一切文本，并在shell中以整体形式执行。</p>
+
+<p><code>%cpaste</code>跟<code>%paste</code>差不多，只不过它多出了一个用于粘贴代码的特殊提示符而已。如果发现粘贴的代码有错，只需要按下<code>ctrl+c</code>即可终止<code>%cpaste</code>。</p>
+
+<hr />
+
+<h2 id="键盘快捷键">键盘快捷键</h2>
+
+<ol>
+<li><code>Ctrl-P</code>    或上箭头键 后向搜索命令历史中以当前输入的文本开头的命令</li>
+<li><code>Ctrl-N</code>   或下箭头键 前向搜索命令历史中以当前输入的文本开头的命令</li>
+<li><code>Ctrl-R</code>   按行读取的反向历史搜索（部分匹配）</li>
+<li><code>Ctrl-Shift-v</code>   从剪贴板粘贴文本</li>
+<li><code>Ctrl-C</code>   中止当前正在执行的代码</li>
+<li><code>Ctrl-A</code>   将光标移动到行首</li>
+<li><code>Ctrl-E</code>   将光标移动到行尾</li>
+<li><code>Ctrl-K</code>   删除从光标开始至行尾的文本</li>
+<li><code>Ctrl-U</code>   清除当前行的所有文本译注12</li>
+<li><code>Ctrl-F</code>   将光标向前移动一个字符</li>
+<li><code>Ctrl-b</code>   将光标向后移动一个字符</li>
+<li><code>Ctrl-L</code>   清屏</li>
+</ol>
+
+<hr />
+
+<h2 id="异常和跟踪">异常和跟踪</h2>
+
+<hr />
+
+<h2 id="魔术命令">魔术命令</h2>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>%quickref</code></td>
+<td>显示IPython的快速参考</td>
+</tr>
+
+<tr>
+<td><code>%magic</code></td>
+<td>显示所有魔术命令的详细文档</td>
+</tr>
+
+<tr>
+<td><code>%debug</code></td>
+<td>从最新的异常跟踪的底部进入交互式调试器</td>
+</tr>
+
+<tr>
+<td><code>%hist</code></td>
+<td>打印命令的输入（可选输出）历史</td>
+</tr>
+
+<tr>
+<td><code>%pdb</code></td>
+<td>在异常发生后自动进入调试器</td>
+</tr>
+
+<tr>
+<td><code>%paste</code></td>
+<td>执行剪贴板中的Python代码</td>
+</tr>
+
+<tr>
+<td><code>%cpaste</code></td>
+<td>打开一个特殊提示符以便手工粘贴待执行的Python代码</td>
+</tr>
+
+<tr>
+<td><code>%reset</code></td>
+<td>删除interactive命名空间中的全部变量/名称</td>
+</tr>
+
+<tr>
+<td><code>%page OBJECT</code></td>
+<td>通过分页器打印输出OBJECT</td>
+</tr>
+
+<tr>
+<td><code>%run script.py</code></td>
+<td>在IPython中执行一个Python脚本文件</td>
+</tr>
+
+<tr>
+<td><code>%prun statement</code></td>
+<td>通过cProfile执行statement，并打印分析器的输出结果</td>
+</tr>
+
+<tr>
+<td><code>%time statement</code></td>
+<td>报告statement的执行时间</td>
+</tr>
+
+<tr>
+<td><code>%timeit statement</code></td>
+<td>多次执行statement以计算系综平均执行时间。对那些执行时  间非常小的代码很有用</td>
+</tr>
+
+<tr>
+<td><code>%who,%who_ls,%whos</code></td>
+<td>显示interactive命名空间中定义的变量，信息级别/冗余度可变</td>
+</tr>
+
+<tr>
+<td><code>%xdel variable</code></td>
+<td>删除variable，并尝试清除其在IPython中的对象上的一切引用</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="基于qt的富gui控制台">基于Qt的富GUI控制台</h2>
+
+<p>Ipython团队开发了一个基于Qt框架（其目的是为终端应用程序提供诸如内嵌图片、多行编辑、语法高亮之类的富文本剪辑功能）的GUI控制台。</p>
+
+<p>使用</p>
+
+<pre><code>ipython qtconsole --pylab=inline
+</code></pre>
+
+<p>来启动的话可为其添加绘图功能。</p>
+
+<p>ps.这一步刚开始无法执行，我的解决方法是：</p>
+
+<p><code>pip install qtconsole</code>，就可以运行了</p>
+
+<hr />
+
+<h2 id="matplotlib集成与pylab模式">matplotlib集成与pylab模式</h2>
+
+<p>通常我们通过在启动Ipython时加上<code>--pylab</code>标记来集成matplotlib</p>
+
+<pre><code>ipython --pylab
+</code></pre>
+
+<hr />
+
+<h2 id="使用历史命令">使用历史命令</h2>
+
+<hr />
+
+<h2 id="搜索并重用历史命令">搜索并重用历史命令</h2>
+
+<p>历史命令用上下箭头就好啦，<code>ctrl+p</code>和<code>ctrl+n</code>太麻烦啦。</p>
+
+<p><code>ctrl+r</code>用于实现部分增量搜索，按下<code>ctrl+r</code>并输入你想搜索的行中的几个字符。按下<code>ctrl+r</code>将会循环搜索历史命令中每一条与输入相符的行。</p>
+
+<h2 id="输入和输出变量">输入和输出变量</h2>
+
+<p>ipython将最近的两个输出结果保存在<code>_</code>(一个下划线)和<code>__</code>(两个下划线)变量中</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192246974-1319147098.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192246974-1319147098.png" /></p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192257943-459695453.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192257943-459695453.png" /></p>
+
+<p>输入的文本被保存在名为_iX的变量中，其中X是输入行的行号。比如说，在输入完27行后，就会产生两个新变量_27(输出变量)和_i27(输入变量)</p>
+
+<h2 id="记录输入和输出">记录输入和输出</h2>
+
+<p>执行<code>%logstart</code>既可开始记录日志</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192627959-2141553893.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319192627959-2141553893.png" /></p>
+
+<h2 id="与操作系统交互">与操作系统交互</h2>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319231548771-1569146085.jpg" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319231548771-1569146085.jpg" /></p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319231624803-886447415.jpg" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319231624803-886447415.jpg" /></p>
+
+<h2 id="shell命令和别名">shell命令和别名</h2>
+
+<p>在ipython中，以感叹号(<code>!</code>)开头的命令行表示其后的所有内容需要在系统shell中执行。</p>
+
+<p>在使用<code>!</code>时，ipython还允许使用当前环境中定义的python值。只需要在变量名前面加上<code>$</code>即可</p>
+
+<p>魔术命令<code>%alias</code>可以为shell命令自定义简称。</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319232354990-791420444.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319232354990-791420444.png" /></p>
+
+<p>这是怎么回事儿~！</p>
+
+<h2 id="目录书签系统">目录书签系统</h2>
+
+<p>ipython有一个简单的目录书签系统，它使你能保存常用目录的别名以实现快速跳转。（这儿我电脑同样执行不出来，待解决。）</p>
+
+<h2 id="软件开发工具">软件开发工具</h2>
+
+<h3 id="交互式调试器">交互式调试器</h3>
+
+<p><code>%debug</code>命令（在发生异常之后马上输入）将会调用哪个“事后调试器”，并直接跳转到引发异常的那个栈帧（stack frame）</p>
+
+<p>这儿需要打开ipython_bug.py文件，需要的同学可以问我要，路径还需要自己改一改。</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319233001099-1585453825.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319233001099-1585453825.png" /></p>
+
+<p>在这个调试器中，可以执行任意python代码并查看各个栈帧中的一切对象和数据（也就是解释还“留了条生路”的那些）。</p>
+
+<p>默认从最低级开始的（即错误发生的地方）。</p>
+
+<p>输入<code>u（up）</code>和<code>d（down）</code>即可在栈跟踪的个级别之间的切换</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319233333771-296978243.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319233333771-296978243.png" /></p>
+
+<p>执行<code>%Pdb</code>命令可以让ipython在出现异常之后自动调用调试器。</p>
+
+<p>此外，调试器还可以为代码开发工作提供帮助，尤其是当你想要设置断点或对函数、脚本进行单步调试以查看各条语句的执行情况时。</p>
+
+<h3 id="此外-调试器还可以为代码开发工作提供帮助-尤其是当你想要设置断点或对函数-脚本进行单步调试以查看各条语句的执行情况时">此外，调试器还可以为代码开发工作提供帮助，尤其是当你想要设置断点或对函数、脚本进行单步调试以查看各条语句的执行情况时。</h3>
+
+<h3 id="测试代码的执行时间-time-和-timeit">测试代码的执行时间：<code>%time</code>和<code>%timeit</code></h3>
+
+<p><code>%time</code>一次执行一条语句，然后报告总体执行时间。</p>
+
+<p>例子：下面是一个拥有60万字符串的数组，以及两个不同的“能够选出其中以foo开头的字符串”的方法：</p>
+
+<pre><code>#一个非常大的字符串数组
+strings = ['foo','foobar','baz','qux','python','Guido Van Rossum']*100000
+method1 = [x for x in strings if x.startswith('foo')]
+mathod2 = [x for x in strings if x[:3] == 'foo']
+</code></pre>
+
+<p>通过<code>%time</code>来测试：</p>
+
+<p><img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319234725459-195998075.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319234725459-195998075.png" /></p>
+
+<p>但是这并不是一个非常精确的结果，如果你对相同的语句多次执行<code>%time</code>的话，就会发现其结果是会变的。</p>
+
+<p>为了得到更为精确的结果，需要使用魔术函数<code>%timeit</code>，对于任意语句，它会自动多次执行以产生一个非常精确的平均执行时间。
+<img src="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319235038599-468407437.png" alt="http://images2015.cnblogs.com/blog/911998/201603/911998-20160319235038599-468407437.png" /></p>
+
+<h3 id="基本性能分析-prun-和-run-p">基本性能分析：<code>%prun</code>和<code>%run -p</code></h3>
+
+<h3 id="逐行分析函数性能">逐行分析函数性能</h3>
+
+<hr />
+
+<h2 id="利用ipython提高代码开发效率的几点提示">利用ipython提高代码开发效率的几点提示</h2>
+
+<h3 id="重新加载模块依赖项">重新加载模块依赖项</h3>
+
+<h3 id="代码设计提示">代码设计提示</h3>
+
+<ol>
+<li>保留有意义的对象和数据</li>
+<li>扁平结构要比嵌套结构好</li>
+<li>无惧大文件</li>
+</ol>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/python/" rel="tag">python</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/jupyter/" rel="tag">jupyter</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tech/tools/develop/jupyter/jupyter-notebook-tutorial/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Jupyter Notebook 快速入门</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tech/tools/develop/jupyter/jupyter-remote-visit/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Jupyter远程访问设置</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-common-plugins/">Vim常用插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-buffer/">Vim Buffer</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-study-note/">Vim学习笔记</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-plugin/">Maven插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-build-life-cycle/">Maven构建生命周期</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python" title="Python">Python (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

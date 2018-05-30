@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maven on Matrix</title>
+    <link>https://sineatos.github.io/tags/maven/</link>
+    <description>Recent content in Maven on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 08:47:41 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Maven插件</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</link>
+      <pubDate>Wed, 30 May 2018 08:47:41 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</guid>
+      <description>Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： 创建 jar 文件 创建 war 文件 编译代码文件 进行代码单元测试 创建项目文档</description>
+    </item>
+    
+    <item>
+      <title>Maven构建生命周期</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</link>
+      <pubDate>Wed, 30 May 2018 08:45:32 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</guid>
+      <description>阶段 处理 描述 准备资源 资源复制 资源复制可以进行定制 编译 执行编译 源代码编译在此阶段完成 包装 打包 创建JAR/WAR包如在 pom.xml 中定义提及的包 安装 安装 这</description>
+    </item>
+    
+    <item>
+      <title>Maven构建可执行的jar包(包含依赖jar包)</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</link>
+      <pubDate>Wed, 30 May 2018 08:42:35 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</guid>
+      <description>目标：将依赖的第三方jar包打进去 方法：maven-assembly-plugin 遇到过的坑： 修改完pom.xml后，不生效。 改pom.xm</description>
+    </item>
+    
+    <item>
+      <title>Maven学习笔记</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</link>
+      <pubDate>Wed, 30 May 2018 08:37:25 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</guid>
+      <description>maven的配置 先下载maven(在maven.apache.org) 解压、配置环境变量(保证最终path中有指向maven目录中的bin目</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on Matrix</title>
+    <link>https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 30 May 2018 08:55:39 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Vim常用插件</title>
+      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</link>
+      <pubDate>Wed, 30 May 2018 08:55:39 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-common-plugins/</guid>
+      <description>记录一些我自己正在使用的Vim插件。 插件收集：https://vimawesome.com 对于需要python或者lua支持的vim，可以考</description>
+    </item>
+    
+    <item>
+      <title>Vim Buffer</title>
+      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</link>
+      <pubDate>Wed, 30 May 2018 08:53:16 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-buffer/</guid>
+      <description>参考： http://ju.outofmemory.cn/entry/102211 https://blog.csdn.net/Poechant/article/details/7216168 https://blog.csdn.net/chienchia/article/details/32123297 Buffer是内存中的一块缓冲区域，用于临时存放Vim打开过的文件。用Vim打开文件后，文件就自动被加入到Buffer队列中，而</description>
+    </item>
+    
+    <item>
+      <title>Vim学习笔记</title>
+      <link>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</link>
+      <pubDate>Wed, 30 May 2018 08:50:35 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/vim/vim-study-note/</guid>
+      <description>参考: http://easwy.com/blog/archives/advanced-vim-skills-catalog/ http://www.atool.org/vim.php 除了简单的移动光标、编辑功能以及查找以外，还需要先掌握的： 分割窗口 移动窗口 编辑多个文件 移动以及编辑 hjkl : 左下上右 uiop : 撤销 插入 从下行开</description>
+    </item>
+    
+    <item>
+      <title>Maven插件</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</link>
+      <pubDate>Wed, 30 May 2018 08:47:41 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-plugin/</guid>
+      <description>Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： 创建 jar 文件 创建 war 文件 编译代码文件 进行代码单元测试 创建项目文档</description>
+    </item>
+    
+    <item>
+      <title>Maven构建生命周期</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</link>
+      <pubDate>Wed, 30 May 2018 08:45:32 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-life-cycle/</guid>
+      <description>阶段 处理 描述 准备资源 资源复制 资源复制可以进行定制 编译 执行编译 源代码编译在此阶段完成 包装 打包 创建JAR/WAR包如在 pom.xml 中定义提及的包 安装 安装 这</description>
+    </item>
+    
+    <item>
+      <title>Maven构建可执行的jar包(包含依赖jar包)</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</link>
+      <pubDate>Wed, 30 May 2018 08:42:35 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-build-executable-jar/</guid>
+      <description>目标：将依赖的第三方jar包打进去 方法：maven-assembly-plugin 遇到过的坑： 修改完pom.xml后，不生效。 改pom.xm</description>
+    </item>
+    
+    <item>
+      <title>Maven学习笔记</title>
+      <link>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</link>
+      <pubDate>Wed, 30 May 2018 08:37:25 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/maven/maven-study-note/</guid>
+      <description>maven的配置 先下载maven(在maven.apache.org) 解压、配置环境变量(保证最终path中有指向maven目录中的bin目</description>
+    </item>
+    
+    <item>
+      <title>Docker简单教程</title>
+      <link>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</link>
+      <pubDate>Wed, 30 May 2018 08:33:04 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/</guid>
+      <description>1. 安装 Docker 要求 Ubuntu 系统的内核版本高于 3.10，且为64位机器 在linux下安装： sudo apt-get install docker sudo apt-get install docker.io 或者安装最新版： wget -qO- https://get.docker.com/ | sh 安装完以后运行： sudo service docker</description>
+    </item>
+    
+    <item>
+      <title>常用魔法命令</title>
+      <link>https://sineatos.github.io/tech/tools/develop/jupyter/common-magic-command/</link>
+      <pubDate>Wed, 30 May 2018 01:47:38 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/common-magic-command/</guid>
+      <description>命令 作用 %quickref 显示 IPython 快速参考 %magic 显示所有魔术命令的详细文档 %debug 从最新的异常跟踪的底部进入交互式调试器 %pdb 在异常发生后自动进入调试器 %reset 删除 interactive 命名空间中的</description>
+    </item>
+    
+    <item>
+      <title>Jupyter远程访问设置</title>
+      <link>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</link>
+      <pubDate>Wed, 30 May 2018 01:37:44 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-remote-visit/</guid>
+      <description>1. 登录远程服务器 2. 生成配置文件 jupyter notebook --generate-config 3. 生成密码 打开ipython 进行以下操作: In [1]: from notebook.auth import passwd In [2]: passwd() Enter password: Verify password: Out[2]: &#39;sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e&#39; 4. 打开配置文件 # vim ~/.jupyter/jupyter_notebook_config.py # 常用配置 c.NotebookApp.ip=&#39;*&#39;</description>
+    </item>
+    
+    <item>
+      <title>IPython学习笔记</title>
+      <link>https://sineatos.github.io/tech/tools/develop/jupyter/ipython-study-note/</link>
+      <pubDate>Wed, 30 May 2018 01:29:38 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/ipython-study-note/</guid>
+      <description>安装与运行 参考http://www.cnblogs.com/zzhzhao/p/5295476.html 安装ipython用pip即可(pi</description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook 快速入门</title>
+      <link>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-notebook-tutorial/</link>
+      <pubDate>Wed, 30 May 2018 01:25:16 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/jupyter/jupyter-notebook-tutorial/</guid>
+      <description>安装 方法一：使用pip进行安装： pip install jupyter 方法二：安装Anaconda即可 运行 运行jupyter notebook，只需要在终端上输入： jupyter notebook 运行完</description>
+    </item>
+    
+    <item>
+      <title>Tmux 命令 快捷键</title>
+      <link>https://sineatos.github.io/tech/tools/develop/tmux/tmux-shortcut/</link>
+      <pubDate>Wed, 30 May 2018 01:20:14 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/tmux/tmux-shortcut/</guid>
+      <description>参考: http://blog.csdn.net/u014015972/article/details/51611817 命令 tmux new -s myname 可以指定Session名 [PREFIX-:] new -s 在tmux中创建一个会话 tmux attach-session -t myname 重新连接此会话 tmux attach tmux attach -t basic 重新连接basic这个会话 tmux a -t</description>
+    </item>
+    
+    <item>
+      <title>Tmux 速成教程:技巧和调整</title>
+      <link>https://sineatos.github.io/tech/tools/develop/tmux/tmux-tutorial/</link>
+      <pubDate>Wed, 30 May 2018 01:00:40 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tech/tools/develop/tmux/tmux-tutorial/</guid>
+      <description>基础知识 Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常</description>
+    </item>
+    
+  </channel>
+</rss>

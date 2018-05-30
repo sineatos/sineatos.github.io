@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tmux 速成教程:技巧和调整</title>
+	<meta name="description" content="tmux tutorial">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Tmux 速成教程:技巧和调整" />
+<meta property="og:description" content="tmux tutorial" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tech/tools/develop/tmux/tmux-tutorial/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T01:00:40&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T01:00:40&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Tmux 速成教程:技巧和调整</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T01:00:40">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<h2 id="基础知识">基础知识</h2>
+
+<p>Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常实用。</p>
+
+<h3 id="tmux-的快捷键前缀-prefix">Tmux 的快捷键前缀（Prefix）</h3>
+
+<p>当想要使用快捷键时，需要先按下快捷键前缀，然后再按下快捷键。Tmux 所使用的快捷键前缀默认是组合键 <code>Ctrl-b</code></p>
+
+<p>建议：
+1. 对调<code>Ctrl</code>键和<code>Caps-Lock</code>键的功能，使得按快捷键更容易、便捷。
+2. 建议将 Tmux 的快捷键前缀变为<code>Ctrl - a</code>。用<code>Caps-Lock</code>键替代了<code>Ctrl</code>键之后，由于<code>Caps-Lock</code>键与<code>a</code>键离得更近，所以按下<code>Ctrl - a</code>就将会比按下<code>Ctrl - b</code>更容易、更便捷。</p>
+
+<p>更改快捷键配置：</p>
+
+<pre><code># ~/.tmux.conf
+unbind C-b
+set -g prefix C-a
+</code></pre>
+
+<h3 id="tmux-的配置文件">Tmux 的配置文件</h3>
+
+<p>每当开启一个新的会话时，Tmux 都会先读取<code>~/.tmux.conf</code>这个文件。</p>
+
+<p>小提示：如果希望新的配置项能够立即生效，那么可以将下面这一行配置加入到文件<code>~/.tmux.conf 中</code>。</p>
+
+<pre><code># bind a reload key
+bind R source-file ~/.tmux.conf ; display-message &quot;Config reloaded..&quot;
+</code></pre>
+
+<p>这样配置了之后，每当向<code>~/.tmux.conf</code>文件中添加了新的配置，只需要按下<code>Ctrl-b r</code>就可以重新加载配置并使新的配置生效，从而免去了开启一个新的会话。</p>
+
+<h2 id="tmux-中最棒的功能">Tmux 中最棒的功能</h2>
+
+<p>容器之间的关系：</p>
+
+<pre><code>tmux -&gt; session -&gt; window -&gt; pane
+</code></pre>
+
+<h3 id="窗格-pane">窗格(Pane)</h3>
+
+<ol>
+<li>创建一个竖直放置的窗格: <code>Ctrl-b %</code></li>
+<li>创建一个水平放置的窗格: <code>Ctrl-b &quot;</code></li>
+<li>窗格之间的移动：<code>Ctrl-b 方向键</code></li>
+</ol>
+
+<h3 id="窗口-window">窗口(Window)</h3>
+
+<p>窗口是个窗格容器，可以将多个窗格放置在窗口中，并根据实际需要在窗口中排列多个窗格。在 Tmux 的会话中，现有的窗口将会列在屏幕下方。下图所示的就是在默认情况下 Tmux 列出现有窗口的方式。这里一共有三个窗口，分别是“server”、“editor”和“shell”。</p>
+
+<p><img src="http://ww3.sinaimg.cn/mw690/7178f37ejw1et82d3hvlrj20hg0as74s.jpg" alt="http://ww3.sinaimg.cn/mw690/7178f37ejw1et82d3hvlrj20hg0as74s.jpg" /></p>
+
+<ol>
+<li>创建一个窗口: <code>Ctrl-b c</code></li>
+<li>切换窗口: <code>Ctrl-b 窗口对应的数字编号</code></li>
+</ol>
+
+<h3 id="会话-session">会话(Session)</h3>
+
+<p>一个 Tmux 会话中可以包含多个窗口，以为一个特定的项目创建一个专用的 Tmux 会话。</p>
+
+<ol>
+<li>创建一个新的会话: <code>tmux new -s &lt;name-of-my-session&gt;</code></li>
+<li>当前已拥有一个会话，再创建一个新的会话: <code>Ctrl-b tmux new -s &lt;name-of-my-session&gt;</code></li>
+</ol>
+
+<p>除非显式地关闭会话，否则 Tmux 的会话在重启计算机之前都不会消失。只要还没有重启计算机，你都可以自由地从一个项目的会话跳转到另一个。</p>
+
+<h3 id="在-tmux-的会话间切换">在 Tmux 的会话间切换</h3>
+
+<ol>
+<li>获取现有会话的列表: <code>Ctrl-b s</code>。列表中的每个会话都有一个 ID，该 ID 是从 0 开始的。按下对应的 ID 就可以进入会话。</li>
+<li>介入已开启的会话: <code>tmux attach</code></li>
+</ol>
+
+<h3 id="在文本间快速移动光标-复制文本">在文本间快速移动光标，复制文本</h3>
+
+<ol>
+<li><p>使得Tmux的复制文字的时候按键模式像vi一样:</p>
+
+<pre><code>~/.tmux.conf
+# Use vim keybindings in copy mode
+setw -g mode-keys vi
+</code></pre></li>
+</ol>
+
+<h3 id="将复制下来的文本发送到系统的剪贴板中">将复制下来的文本发送到系统的剪贴板中</h3>
+
+<p>在默认情况下，当从 Tmux 中复制文本时，复制下来的文本只能粘贴到同一个 Tmux 会话中。若要使复制下来的文本可以粘贴到任何位置，就需要让 Tmux 将文本复制到系统的剪贴板。安装<code>retach-to-user-namespace</code>：</p>
+
+<pre><code>sudo apt-get reattach-to-user-namespace
+</code></pre>
+
+<p>并在配置文件<code>~/.tmux.conf</code>加入：</p>
+
+<pre><code>~/.tmux.conf
+# invoke reattach-to-user-namespace every time a new window/pane opens
+set-option -g default-command &quot;reattach-to-user-namespace -l bash
+</code></pre>
+
+<h3 id="选择和复制文本">选择和复制文本</h3>
+
+<ol>
+<li>进入复制模式: <code>Ctrl-b [</code></li>
+<li>在复制模式中选选择文本，按下空格开始选择文本，按下回车将选择以后的文本复制到粘贴板</li>
+</ol>
+
+<h3 id="使得复制文本更像vim的操作">使得复制文本更像Vim的操作</h3>
+
+<p>在 <code>~/..tmux.conf</code> 配置 Tmux <code>v</code> 选择文本，<code>y</code> 复制文本：</p>
+
+<pre><code># start selecting text typing 'v' key (once you are in copy mode)
+bind-key -t vi-copy v begin-selection
+# copy selected text to the system's clipboard
+bind-key -t vi-copy y copy-pipe &quot;reattach-to-user-namespace pbcopy&quot;
+</code></pre>
+
+<h3 id="共享tmux会话-结对编程">共享Tmux会话(结对编程)</h3>
+
+<p>将 Tmux 会话的地址分享给他人，这样他们就可以通过 SSH 接入这个会话。由于会话是建立在 SSH 之上的，所以不会产生额外的开销。通过使用高速的互联网，对于那些连接到远程会话上的用户而言，他们会觉得这个会话就是运行在本地的。</p>
+
+<h4 id="在tmux-中使用-tmate">在Tmux 中使用 Tmate</h4>
+
+<p>Tmate 是一个 Tmux 的管理工具，使用它不但能够轻松地创建 Tmux 会话而且还能够通过互联网把该会话共享给其他人。若要使用 Tmate 共享 Tmux 会话，请按照以下步骤操作：
+- 安装 Homebrew
+- 安装 Tmate
+- 使用 Tmate 开启一个新的会话
+- 从 Tmux 的会话中复制由 Tmate 产生的 SSH URL。如下图所示，请注意屏幕下方的信息“[tmate] Remote session: ssh …”
+- 利用刚刚复制下来的 URL 就可以邀请其他人通过 SSH 访问你的会话了。</p>
+
+<h2 id="调整-tmux-以增强其同-vim-的集成度">调整 Tmux 以增强其同 Vim 的集成度</h2>
+
+<h3 id="调整背景的配色方案">调整背景的配色方案</h3>
+
+<p>在<code>~/.vimrc</code>中加入(通过 Tmux 运行 Vim 需要配置一个特殊的终端参数)：</p>
+
+<pre><code>if exists('$TMUX')
+  set term=screen-256color
+endif
+</code></pre>
+
+<h3 id="调整光标的形状">调整光标的形状</h3>
+
+<p>在默认情况下，当通过 Tmux 运行 Vim 时，无论当前 Vim 是处于插入模式、可视模式还是其他模式，光标的形状都是一样的。这样就很难判断当前的 Vim 模式是什么。若要避免这个问题，就需要让 Tmux 通知 iTerm 更新光标的形状。为此，需要将以下配置加入到文件<code>~/.vimrc</code>中。</p>
+
+<pre><code>if exists('$ITERM_PROFILE')
+  if exists('$TMUX') 
+    let &amp;amp;t_SI = &quot;&lt;Esc&gt;[3 q&quot;
+    let &amp;amp;t_EI = &quot;&lt;Esc&gt;[0 q&quot;
+  else
+    let &amp;amp;t_SI = &quot;&lt;Esc&gt;]50;CursorShape=1x7&quot;
+    let &amp;amp;t_EI = &quot;&lt;Esc&gt;]50;CursorShape=0x7&quot;
+  endif
+end
+</code></pre>
+
+<h3 id="调整粘贴时的文本缩进">调整粘贴时的文本缩进</h3>
+
+<p>在 Vim 中粘贴文本时可能会遇到这样的问题，有时文本的缩进会发生变化，特别是在粘贴大量的文本时，这个问题会更加明显。虽然可以通过在粘贴前执行<code>:set nopaste</code> 来解决这个问题，但是这里还有一种更好的解决方法。就是把下面这段配置加入到配置文件<code>~/.vimrc</code>中，这样 Vim 就会自动地阻止粘贴文本时的自动缩进。</p>
+
+<pre><code>&quot; for tmux to automatically set paste and nopaste mode at the time pasting (as
+&quot; happens in VIM UI)
+ 
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+ 
+  let tmux_start = &quot;&lt;Esc&gt;Ptmux;&quot;
+  let tmux_end = &quot;&lt;Esc&gt;&quot;
+ 
+  return tmux_start . substitute(a:s, &quot;&lt;Esc&gt;&quot;, &quot;&lt;Esc&gt;&lt;Esc&gt;&quot;, 'g') . tmux_end
+endfunction
+ 
+let &amp;amp;t_SI .= WrapForTmux(&quot;&lt;Esc&gt;[?2004h&quot;)
+let &amp;amp;t_EI .= WrapForTmux(&quot;&lt;Esc&gt;[?2004l&quot;)
+ 
+function! XTermPasteBegin()
+  set pastetoggle=&lt;Esc&gt;[201~
+  set paste
+  return &quot;&quot;
+endfunction
+ 
+inoremap &lt;special&gt; &lt;expr&gt; &lt;Esc&gt;[200~ XTermPasteBegin()
+</code></pre>
+
+<h2 id="美化-tmux-的状态栏">美化 Tmux 的状态栏</h2>
+
+<p>在配置文件<code>~/.tmux.conf</code>中加入:</p>
+
+<pre><code># 状态栏
+# 颜色
+set -g status-bg black
+set -g status-fg white
+
+# 对齐方式
+set-option -g status-justify centre
+ 
+# 左下角
+set-option -g status-left '#[bg=black,fg=green][#[fg=cyan]#S#[fg=green]]'
+set-option -g status-left-length 20
+ 
+# 窗口列表
+setw -g automatic-rename on
+set-window-option -g window-status-format '#[dim]#I:#[default]#W#[fg=grey,dim]'
+set-window-option -g window-status-current-format '#[fg=cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]'
+ 
+# 右下角
+set -g status-right '#[fg=green][#[fg=cyan]%Y-%m-%d#[fg=green]]'
+</code></pre>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/tmux/" rel="tag">tmux</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tech/tools/develop/tmux/tmux-shortcut/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Tmux 命令 快捷键</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-common-plugins/">Vim常用插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-buffer/">Vim Buffer</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-study-note/">Vim学习笔记</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-plugin/">Maven插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-build-life-cycle/">Maven构建生命周期</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python" title="Python">Python (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

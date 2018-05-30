@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Docker简单教程</title>
+	<meta name="description" content="Docker Tutorial">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="Docker简单教程" />
+<meta property="og:description" content="Docker Tutorial" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tech/tools/develop/docker/docker-tutorial/" />
+
+
+
+<meta property="article:published_time" content="2018-05-30T08:33:04&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-30T08:33:04&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Hi. I&#39;m Sineatos</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Docker简单教程</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-05-30T08:33:04">May 30, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			
+
+<h2 id="1-安装">1. 安装</h2>
+
+<p><strong>Docker 要求 Ubuntu 系统的内核版本高于 3.10，且为64位机器</strong></p>
+
+<ul>
+<li><p>在linux下安装：</p>
+
+<pre><code>sudo apt-get install docker
+sudo apt-get install docker.io
+</code></pre></li>
+
+<li><p>或者安装最新版：</p>
+
+<pre><code>wget -qO- https://get.docker.com/ | sh
+</code></pre></li>
+
+<li><p>安装完以后运行：</p>
+
+<pre><code>sudo service docker start
+</code></pre></li>
+
+<li><p>设置docker支持中文(<a href="http://blog.csdn.net/steveyg/article/details/52400097">http://blog.csdn.net/steveyg/article/details/52400097</a>)</p>
+
+<pre><code>sudo apt-get install language-pack-hans language-pack-hant
+dpkg-reconfigure locales  
+</code></pre></li>
+
+<li><p>使得非root用户也能使用Docker</p>
+
+<p><a href="http://blog.csdn.net/kongxx/article/details/52413332">http://blog.csdn.net/kongxx/article/details/52413332</a></p>
+
+<ol>
+<li>创建docker组 <code>sudo groupadd docker</code></li>
+<li>将当前用户加入docker组 <code>sudo gpasswd -a ${USER} docker</code></li>
+<li>使用对应系统的服务重启命令重新启动docker服务 <code>sudo systemctl restart docker</code></li>
+<li>当前用户退出系统重新登陆</li>
+<li>运行docker命令 <code>docker ps</code></li>
+</ol></li>
+</ul>
+
+<h2 id="2-docker基本操作">2. Docker基本操作</h2>
+
+<h3 id="2-0-查看镜像">2.0 查看镜像</h3>
+
+<pre><code>docker images
+</code></pre>
+
+<h3 id="2-1-启动容器">2.1 启动容器</h3>
+
+<pre><code>docker run -itd --name container_name -v 本地目录路径(最好是绝对路径):容器中目录路径(如果不存在则自动创建) 镜像名 /bin/bash
+</code></pre>
+
+<p>其中：
+1. <code>-t</code> : 在新容器内指定一个伪终端或终端，选填。
+2. <code>-i</code> : 允许你对容器内的标准输入 (STDIN) 进行交互，选填。
+3. <code>-d</code> : 后台启动容器，选填，如果使用<code>-tid</code>三个选项，容器就不会因为没有执行任务而停止。
+4. <code>--name</code> : 后面跟容器的名称，可选
+5. <code>-v</code> : 路径映射，选填，每有一对映射，映射前面就加一个<code>-v</code>，宿主中目录路径:容器中目录路径
+6. <code>-p</code> : ip映射，选填，每有一对映射，映射前面就加一个<code>-p</code>，宿主ip:容器ip
+7. 镜像名 : 执行使用的镜像
+8. 指令 : 在镜像中执行的指令，注意，<strong>当指令执行完以后容器就会停止工作</strong></p>
+
+<h3 id="2-2-启动-停止-杀死-重启-删除-重命名一个已存在的容器-或进入一个后台运行中的容器">2.2 启动、停止、杀死、重启、删除、重命名一个已存在的容器，或进入一个后台运行中的容器</h3>
+
+<pre><code>docker start Name/ID
+docker stop Name/ID
+docker kill Name/ID
+docker restart Name/ID
+docker rm Name/ID1 Name/ID2 ...
+docker rename old_name new_name
+
+# 进入后台正在运行的容器，exit以后不会断开
+docker exec -ti Name/ID /bin/bash
+</code></pre>
+
+<h3 id="2-3-查看容器状态">2.3 查看容器状态</h3>
+
+<pre><code>docker ps   # 查看正在运行的容器状态
+docker ps -a   # 查看所有容器状态
+</code></pre>
+
+<h3 id="2-4-删除镜像">2.4 删除镜像</h3>
+
+<pre><code>sudo docker rmi -f 镜像名
+</code></pre>
+
+<h3 id="2-5-搜索镜像">2.5 搜索镜像</h3>
+
+<pre><code>docker search 镜像名
+</code></pre>
+
+<h3 id="2-6-下载镜像">2.6 下载镜像</h3>
+
+<pre><code>docker pull 镜像名
+</code></pre>
+
+<h3 id="2-7-将容器打包成镜像">2.7 将容器打包成镜像</h3>
+
+<pre><code>docker commit -m=&quot;has update&quot; -a=&quot;runoob&quot; e218edb10161 runoob/ubuntu:v2
+</code></pre>
+
+<p>其中：
+1. <code>-m</code> : 提交的信息
+2. <code>-a</code> : 作者名称
+3. hash : Name/ID，不一定需要完整的ID，只要可以识别是哪个容器就可以了
+4. 镜像名 : 一般命名为“作者名/镜像名:版本号”</p>
+
+<h3 id="2-8-导出容器">2.8 导出容器</h3>
+
+<pre><code>sudo docker export 7691a814370e &gt; ./ubuntu.tar
+</code></pre>
+
+<p>作用为将一个容器直接导出</p>
+
+<h3 id="2-9-导出镜像">2.9 导出镜像</h3>
+
+<pre><code>sudo docker save -o ./输出文件名.tar runoob/ubuntu:v3
+</code></pre>
+
+<p>其中：
+1. <code>-o</code> : 后面跟输出文件名路径
+2. 镜像名 : 指定需要输出的镜像</p>
+
+<h3 id="2-10-导入镜像">2.10 导入镜像</h3>
+
+<pre><code>sudo docker load &lt; /home/save.tar
+</code></pre>
+
+<p>其中：
+<code>&lt;</code> 后面跟已经打包好的镜像的路径</p>
+
+<h3 id="2-11-发布镜像">2.11 发布镜像</h3>
+
+<pre><code>docker push 镜像名
+</code></pre>
+
+<h2 id="3-修改docker镜像原地址">3. 修改Docker镜像原地址</h2>
+
+<h3 id="3-1-国内较快的镜像地址">3.1 国内较快的镜像地址</h3>
+
+<ol>
+<li>Docker 官方中国区 <code>https://registry.docker-cn.com</code></li>
+<li>网易 <code>http://hub-mirror.c.163.com</code></li>
+<li>ustc <code>https://docker.mirrors.ustc.edu.cn</code></li>
+</ol>
+
+<h3 id="3-2-修改方法">3.2 修改方法</h3>
+
+<ul>
+<li>直接设<code>–registry-mirror</code>参数，仅对当前的命令有效
+<code>
+docker run hello-world --registry-mirror=https://docker.mirrors.ustc.edu.cn
+</code></li>
+<li>修改<code>/etc/default/docker</code>，加入 <code>DOCKER_OPTS=”镜像地址”</code>，可以有多个
+<code>
+[Service] 
+ExecStart= 
+ExecStart=/usr/bin/docker -d -H fd:// --registry-mirror=https://docker.mirrors.ustc.edu.cn
+</code></li>
+<li>新版的Docker推荐使用json配置文件的方式，默认为<code>/etc/docker/daemon.json</code>，非默认路径需要修改<code>dockerd</code>的<code>–config-file</code>，在该文件中加入如下内容
+<code>
+{ 
+&quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;] 
+}
+</code></li>
+</ul>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tech/tools/develop/jupyter/common-magic-command/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">常用魔法命令</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/tech/tools/develop/maven/maven-study-note/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Maven学习笔记</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-common-plugins/">Vim常用插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-buffer/">Vim Buffer</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/vim/vim-study-note/">Vim学习笔记</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-plugin/">Maven插件</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tech/tools/develop/maven/maven-build-life-cycle/">Maven构建生命周期</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python" title="Python">Python (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (14)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>
