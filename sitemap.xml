@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sineatos.github.io/tools/programme-language/golang/pkg-study/gorilla-context/</loc>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/tools/programme-language/others/toml/</loc>
     <lastmod>2018-05-30T15:18:52+08:00</lastmod>
   </url>
@@ -170,20 +175,32 @@
   </url>
   
   <url>
+    <loc>https://sineatos.github.io/categories/golang/</loc>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sineatos.github.io/tags/golang%E5%BC%80%E6%BA%90%E5%BA%93/</loc>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/tags/hugo/</loc>
     <lastmod>2018-05-30T14:40:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://sineatos.github.io/tags/java/</loc>
-    <lastmod>2018-05-30T08:47:41+08:00</lastmod>
+    <loc>https://sineatos.github.io/categories/java/</loc>
+    <lastmod>2018-05-30T11:37:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://sineatos.github.io/categories/java/</loc>
-    <lastmod>2018-05-30T11:37:09+08:00</lastmod>
+    <loc>https://sineatos.github.io/tags/java/</loc>
+    <lastmod>2018-05-30T08:47:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,7 +230,7 @@
   
   <url>
     <loc>https://sineatos.github.io/</loc>
-    <lastmod>2018-05-30T15:18:52+08:00</lastmod>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -249,7 +266,7 @@
   
   <url>
     <loc>https://sineatos.github.io/tools/</loc>
-    <lastmod>2018-05-30T15:18:52+08:00</lastmod>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -260,8 +277,14 @@
   </url>
   
   <url>
+    <loc>https://sineatos.github.io/tags/%E5%8E%9F%E5%88%9B/</loc>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-05-30T15:18:52+08:00</lastmod>
+    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
