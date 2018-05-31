@@ -6,10 +6,19 @@
     <description>Recent content in 工具 on Matrix</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 31 May 2018 17:02:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 31 May 2018 21:53:14 +0800</lastBuildDate>
     
 	<atom:link href="https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang中interface的内存布局</title>
+      <link>https://sineatos.github.io/tools/programme-language/golang/implement/interface-memory-layout/</link>
+      <pubDate>Thu, 31 May 2018 21:53:14 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/tools/programme-language/golang/implement/interface-memory-layout/</guid>
+      <description>1. 内存布局 了解interface的内存结构是非常有必要的，只有了解了这一点，我们才能进一步分析诸如类型断言等情况的效率问题。先看一个例子： type</description>
+    </item>
     
     <item>
       <title>Golang开源库: gorilla/context</title>

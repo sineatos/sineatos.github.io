@@ -4,17 +4,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Linux</title>
-	<meta name="description" content="">
+	<title>Golang中interface的内存布局</title>
+	<meta name="description" content="Interface Memory Layout">
 	<meta name="generator" content="Hugo 0.40.2" />
-	<meta property="og:title" content="Linux" />
-<meta property="og:description" content=" Sineatos&#39;s Personal blog about everything" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://sineatos.github.io/tags/linux/" />
+	<meta property="og:title" content="Golang中interface的内存布局" />
+<meta property="og:description" content="Interface Memory Layout" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/programme-language/golang/implement/interface-memory-layout/" />
 
 
 
-<meta property="og:updated_time" content="2018-05-30T01:20:14&#43;08:00"/>
+<meta property="article:published_time" content="2018-05-31T21:53:14&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-05-31T21:53:14&#43;08:00"/>
+
 
 
 
@@ -28,7 +31,6 @@
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss" href="/tags/linux/index.xml">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<script type="text/javascript" src="/js/scripts.js"></script>
@@ -50,53 +52,119 @@
 		</header>
 		<div class="wrapper clearfix">
 
-	<main class="main list content" role="main">
-		<header class="page-header">
-			<h1 class="page-header__title">Linux</h1>
-		</header><article class="list__item post">
-	<div class="list__content clearfix">
-		<header class="list__header">
-			<h3 class="list__title post__title ">
-				<a href="/tools/develop/tmux/tmux-shortcut/" rel="bookmark">Tmux 命令 快捷键</a>
-			</h3><div class="list__meta meta">
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Golang中interface的内存布局</h1><div class="post__meta meta">
 <svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2018-05-30T01:20:14">May 30, 2018</time>
+<time class="post__meta-date meta-date" datetime="2018-05-31T21:53:14">May 31, 2018</time>
 <span class="post__meta-categories meta-categories">
 	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a>, <a class="meta-categories__link" href="/categories/golang" rel="category">Golang</a></span>
 </span></div>
 		</header>
-		<div class="list__excerpt post__content">
-			参考: http://blog.csdn.net/u014015972/article/details/51611817 命令 tmux new -s myname 可以指定Session名 [PREFIX-:] new -s 在tmux中创建一个会话 tmux attach-session -t myname 重新连接此会话 tmux attach tmux attach -t basic 重新连接basic这个会话 tmux a -t
-		</div>
-		<div class="list__footer">
-			<a class="list__footer-readmore btn" href="/tools/develop/tmux/tmux-shortcut/">Read more…</a>
-		</div>
-	</div>
-</article><article class="list__item post">
-	<div class="list__content clearfix">
-		<header class="list__header">
-			<h3 class="list__title post__title ">
-				<a href="/tools/develop/tmux/tmux-tutorial/" rel="bookmark">Tmux 速成教程:技巧和调整</a>
-			</h3><div class="list__meta meta">
-<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-<time class="post__meta-date meta-date" datetime="2018-05-30T01:00:40">May 30, 2018</time>
-<span class="post__meta-categories meta-categories">
-	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
-</span></div>
-		</header>
-		<div class="list__excerpt post__content">
-			基础知识 Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常
-		</div>
-		<div class="list__footer">
-			<a class="list__footer-readmore btn" href="/tools/develop/tmux/tmux-tutorial/">Read more…</a>
-		</div>
-	</div>
-</article>
+		<div class="post__content clearfix">
+			
 
+<h2 id="1-内存布局">1. 内存布局</h2>
+
+<p>了解interface的内存结构是非常有必要的，只有了解了这一点，我们才能进一步分析诸如类型断言等情况的效率问题。先看一个例子：</p>
+
+<pre><code class="language-golang">type Stringer interface {  
+    String() string  
+}  
+   
+type Binary uint64  
+   
+func (i Binary) String() string {  
+    return strconv.Uitob64(i.Get(), 2)  
+}  
+   
+func (i Binary) Get() uint64 {  
+    return uint64(i)  
+}  
+   
+func main() {  
+    b := Binary{}  
+    s := Stringer(b)  
+    fmt.Print(s.String())  
+}  
+</code></pre>
+
+<p>interface在内存上实际由两个成员组成，如下图，<code>tab</code>指向虚表，<code>data</code>则指向实际引用的数据。<strong>虚表描绘了实际的类型信息及该接口所需要的方法集</strong></p>
+
+<p><center></p>
+
+<p><img src="http://i66.tinypic.com/6yczh2.jpg" alt="http://i66.tinypic.com/6yczh2.jpg" /></p>
+
+<p></center></p>
+
+<p>观察<code>itable</code>的结构，首先是描述<code>type</code>信息的一些元数据，然后是满足<code>Stringger</code>接口的函数指针列表（注意，这里不是实际类型<code>Binary</code>的函数指针集哦）。
+因此我们如果通过接口进行函数调用，实际的操作其实就是<code>s.tab-&gt;fun[0](s.data)</code>。
+是不是和<code>C++</code>的虚表很像？接下来我们要看看golang的虚表和<code>C++</code>的虚表区别在哪里。</p>
+
+<p>先看<code>C++</code>，它为每种类型创建了一个方法集，而它的虚表实际上就是这个方法集本身或是它的一部分而已，当面临多继承时（或者叫实现多个接口时，这是很常见的），<code>C++</code>对象结构里就会存在多个虚表指针，每个虚表指针指向该方法集的不同部分，因此，<code>C++</code>方法集里面函数指针有严格的顺序。
+许多<code>C++</code>新手在面对多继承时就变得紧张，因为它的这种设计方式，为了保证其虚表能够正常工作，<code>C++</code>引入了很多概念，什么虚继承啊，接口函数同名问题啊，同一个接口在不同的层次上被继承多次的问题啊等等……
+就是老手也很容易因疏忽而写出问题代码出来。</p>
+
+<p>我们再来看golang的实现方式，同<code>C++</code>一样，golang也为每种类型创建了一个方法集，不同的是接口的虚表是在运行时专门生成的。
+可能细心的同学能够发现为什么要在运行时生成虚表。
+因为太多了，每一种接口类型和所有满足其接口的实体类型的组合就是其可能的虚表数量，实际上其中的大部分是不需要的，因此golang选择在运行时生成它，例如，当例子中当首次遇见<code>s := Stringer(b)</code>这样的语句时，golang会生成<code>Stringer</code>接口对应于<code>Binary</code>类型的虚表，<strong>并将其缓存</strong>。</p>
+
+<p>理解了golang的内存结构，再来分析诸如类型断言等情况的效率问题就很容易了，当判定一种类型是否满足某个接口时，golang使用类型的方法集和接口所需要的方法集进行匹配，如果类型的方法集完全包含接口的方法集，则可认为该类型满足该接口。
+例如某类型有<code>$m$</code>个方法，某接口有<code>$n$</code>个方法，则很容易知道这种判定的时间复杂度为<code>$O(m \times n)$</code>，不过可以使用预先排序的方式进行优化，实际的时间复杂度为<code>$O(m+n)$</code>。</p>
+
+<h2 id="2-使用interface的注意事项">2. 使用interface的注意事项</h2>
+
+<ol>
+<li>将对象赋值给接口变量时会复制该对象。</li>
+<li>接口使用的是一个名为<code>itab</code>的结构体存储的
+<code>
+type iface struct{ 
+tab *itab // 类型信息 
+data unsafe.Pointer // 实际对象指针 
+}
+</code></li>
+<li>只有接口变量内部的两个指针都为nil的时候，接口才等于<code>nil</code>。</li>
+<li>interface实际上是一个引用(只保存了两个值)，因此传递它并不会造成太多的损耗。</li>
+</ol>
+
+<h2 id="3-其他">3. 其他</h2>
+
+<ol>
+<li>Go语言中的interface很灵活，但是也付出了一定的性能代价。</li>
+<li>如果是性能关键的代码，可以考虑放弃interface，自己写原生的代码。</li>
+</ol>
+
+		</div>
 		
-	</main>
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/golang/" rel="tag">Golang</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Hi. I&#39;m Sineatos :)
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/programme-language/golang/pkg-study/gorilla-context/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Golang开源库: gorilla/context</p></a>
+	</div>
+</nav>
+	
+</main>
 
 <aside class="sidebar">
 	
