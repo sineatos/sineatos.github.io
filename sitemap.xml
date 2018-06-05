@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sineatos.github.io/tools/develop/git/git-pull-request/</loc>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/tools/programme-language/golang/implement/interface-memory-layout/</loc>
     <lastmod>2018-05-31T21:53:14+08:00</lastmod>
   </url>
@@ -180,6 +185,12 @@
   </url>
   
   <url>
+    <loc>https://sineatos.github.io/tags/git/</loc>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/tags/golang/</loc>
     <lastmod>2018-05-31T21:53:14+08:00</lastmod>
     <priority>0</priority>
@@ -241,7 +252,7 @@
   
   <url>
     <loc>https://sineatos.github.io/</loc>
-    <lastmod>2018-05-31T21:53:14+08:00</lastmod>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -277,7 +288,7 @@
   
   <url>
     <loc>https://sineatos.github.io/tools/</loc>
-    <lastmod>2018-05-31T21:53:14+08:00</lastmod>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -295,13 +306,13 @@
   
   <url>
     <loc>https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-05-31T21:53:14+08:00</lastmod>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sineatos.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-05-30T08:55:39+08:00</lastmod>
+    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
