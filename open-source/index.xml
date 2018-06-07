@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open-sources on Matrix</title>
+    <link>https://sineatos.github.io/open-source/</link>
+    <description>Recent content in Open-sources on Matrix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 07 Jun 2018 17:37:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://sineatos.github.io/open-source/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cppy</title>
+      <link>https://sineatos.github.io/open-source/cppy/</link>
+      <pubDate>Thu, 07 Jun 2018 17:37:04 +0800</pubDate>
+      
+      <guid>https://sineatos.github.io/open-source/cppy/</guid>
+      <description>介绍一下我之前写的一个使用python3编写的小工具。 地址: https://gitee.com/sineatos/cppy 介绍 主要功能是将指定路径中目录里面的所有py文件编译成pyc文件，然后提取到指</description>
+    </item>
+    
+  </channel>
+</rss>

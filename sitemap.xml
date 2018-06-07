@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sineatos.github.io/open-source/cppy/</loc>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sineatos.github.io/tools/develop/git/git-pull-request/</loc>
     <lastmod>2018-06-05T21:06:49+08:00</lastmod>
   </url>
@@ -252,13 +257,25 @@
   
   <url>
     <loc>https://sineatos.github.io/</loc>
-    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sineatos.github.io/tags/maven/</loc>
     <lastmod>2018-05-30T08:47:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sineatos.github.io/open-source/</loc>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sineatos.github.io/tags/python/</loc>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -300,19 +317,31 @@
   
   <url>
     <loc>https://sineatos.github.io/tags/%E5%8E%9F%E5%88%9B/</loc>
-    <lastmod>2018-05-31T17:02:42+08:00</lastmod>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sineatos.github.io/categories/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sineatos.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-06-05T21:06:49+08:00</lastmod>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sineatos.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sineatos.github.io/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2018-06-07T17:37:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
