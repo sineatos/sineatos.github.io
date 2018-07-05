@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>在Linux下安装OMNet&#43;&#43;</title>
+	<meta name="description" content="Setup Omnetpp in Linux">
+	<meta name="generator" content="Hugo 0.40.2" />
+	<meta property="og:title" content="在Linux下安装OMNet&#43;&#43;" />
+<meta property="og:description" content="Setup Omnetpp in Linux" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sineatos.github.io/tools/develop/omnetpp/setup-omnetpp-in-linux/" />
+
+
+
+<meta property="article:published_time" content="2018-07-05T15:21:16&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-07-05T15:21:16&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-120603484-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body body-right-sidebar">
+	<div class="container container-outer">
+		<header class="header">
+			<div class="container container-inner">
+				<div class="logo" role="banner">
+					<a class="logo__link" href="/" title="Matrix" rel="home">
+						<div class="logo__title">Matrix</div>
+						<div class="logo__tagline">Interested in Machine Learning, Evolutionary Computation, Python, Java and Golang</div>
+					</a>
+				</div>
+			</div>
+			<div class="divider"></div>
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main content">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">在Linux下安装OMNet&#43;&#43;</h1><div class="post__meta meta">
+<svg class="icon icon-time" width="16" height="14" viewBox="0 0 16 16"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+<time class="post__meta-date meta-date" datetime="2018-07-05T15:21:16">July 05, 2018</time>
+<span class="post__meta-categories meta-categories">
+	<svg class="icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta-categories__list"><a class="meta-categories__link" href="/categories/%e5%b7%a5%e5%85%b7" rel="category">工具</a></span>
+</span></div>
+		</header>
+		<div class="post__content clearfix">
+			<p>OMNet++是一个仿真平台和开发环境，以前用过一下，后来已经很长一段时间没有用。
+最近师姐打算搭一个仿真平台做传感器实验，碰巧我有点经验，就打算重新安装OMNet++。</p>
+
+<p>一开始在Windows下面安装，发现这玩意有点坑，从官网下载下来以后需要编译一次才可以(记得以前好像不需要啊)。
+在Windows下装完还是需要3G多一点的空间，然后打开OMNet++以后写好代码编译居然老是报错，搞了一个下午都没搞出究竟是哪里出问题，换了其他人的机器装一遍，发现能够正常编译。
+后来发现是因为我的环境变量里面设置了一个GCC的路径，而OMNet++需要使用的是它目录下MingW64下的GCC，将原来的GCC路径去掉，换成OMNet++里面的GCC就可以了，但是OMNet++的bin目录下还包含了python等工具，跟我自己机器上的环境冲突，影响日常使用。
+最后还是考虑将OMNet++卸了，在虚拟机中安装，原本想装个Win10的虚拟机，发现装不了，只好换个Linux的虚拟机。
+无意中发现Deepin好像看上去不错，想试试就下了装。</p>
+
+<p>不得不说Deepin的界面，源等都不错，感觉比Ubuntu还要适合新手入门，就是有点大，安装完再把一些日常使用的开发工具装一遍就没了20G(庆幸设置虚拟机的时候设了40G)，看来在虚拟机里面还是用vim+插件开发好了。
+但是还是推荐大家试一下这个发行版。</p>
+
+<p>从OMNet++的官网上下了linux下的安装包，大小比windows下的安装包小，估计是少了mingw64的内容变小了。
+解压以后放到<code>$HOME</code>下，然后根据<code>doc/</code>下面的安装指南安装。
+一开始试了下直接<code>./configure</code>，发现好像少了不少东西，然后就根据它的提示逐个逐个<code>apt install</code>，当然，像java,gcc,g++这些都在之前装好了，想起windows的bin目录下还有clang，就顺手装上了，剩下的一些实际上在安装指南上也有给出。
+由于Deepin好像是Debian的衍生，所以我就按照安装指南上面Ubuntu的安装方法把必须装的依赖都装上了。</p>
+
+<p>但是<code>./configure</code>一直报错说找不到C的<code>math</code>库。
+随手写了个cpp的文件，包含了<code>math.h</code>，并使用里面的函数，编译能通过，执行也没问题。
+想了很久，想起前两天看过说clang好像是没有头文件，心想估计跟这有联系。
+再看看安装指南，发现<code>./configure</code>实际上会读取目录中的<code>./configure.user</code>里面的配置，然后根据配置来检查。
+打开<code>./configure.user</code>，检查发现原来是默认优先使用clang来编译，看来是手贱装了个clang惹的祸。</p>
+
+<p>把优先clang编译去掉，然后继续看配置里面还有什么不需要的，比如说设置<code>WITH_OSG=no</code>,<code>OSG_LIBS=no</code>。最后再<code>./configure</code>和<code>make</code>，编译通过了。</p>
+
+<p>在编写完OMNet++的代码以后，编译和运行可能会报一下错误：</p>
+
+<ol>
+<li>提示一些用户自己编写的头文件无法找到，这个时候把对应的<code>include</code>与其删去再重写一遍就可以了。</li>
+
+<li><p>运行提示缺少<code>zlib.1.2.9</code>库，这时在网上下载并编译安装就可以了：</p>
+
+<pre><code># https://sourceforge.net/projects/libpng/files/zlib/1.2.9/zlib-1.2.9.tar.gz/download
+tar -xvf ~/Downloads/zlib-1.2.9.tar.gz
+cd zlib-1.2.9
+sudo -s
+./configure; make; make install
+cd /lib/x86_64-linux-gnu
+ln -s -f /usr/local/lib/libz.so.1.2.9/lib libz.so.1
+cd ~
+rm -rf zlib-1.2.9
+</code></pre></li>
+</ol>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16"><path d="M16 9.5c0 .373-.24.74-.5 1l-5 5c-.275.26-.634.5-1 .5-.373 0-.74-.24-1-.5L1 8a2.853 2.853 0 0 1-.7-1C.113 6.55 0 5.973 0 5.6V1.4C0 1.034.134.669.401.401.67.134 1.034 0 1.4 0h4.2c.373 0 .95.113 1.4.3.45.187.732.432 1 .7l7.5 7.502c.26.274.5.632.5.998zM3.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/linux/" rel="tag">Linux</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/c&#43;&#43;/" rel="tag">C&#43;&#43;</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/omnet&#43;&#43;/" rel="tag">OMNet&#43;&#43;</a></li>
+	</ul>
+</div>
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Sineatos avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Sineatos</span>
+	</div>
+	<div class="authorbox__description">
+		Interested in Machine Learning, Evolutionary Computation, Python, Java and Golang
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/tools/develop/git/git-pull-request/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">GitHub上如何进行PR(Pull Request)操作</p></a>
+	</div>
+</nav>
+	
+</main>
+
+<aside class="sidebar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://sineatos.github.io/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/tools/develop/omnetpp/setup-omnetpp-in-linux/">在Linux下安装OMNet&#43;&#43;</a></li>
+			<li class="widget__item"><a class="widget__link" href="/open-source/cppy/">cppy</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/develop/git/git-pull-request/">GitHub上如何进行PR(Pull Request)操作</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/golang/implement/interface-memory-layout/">Golang中interface的内存布局</a></li>
+			<li class="widget__item"><a class="widget__link" href="/tools/programme-language/golang/pkg-study/gorilla-context/">Golang开源库: gorilla/context</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/categories/golang">Golang</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/java">Java</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/python">Python</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%b7%a5%e5%85%b7">工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae">开源项目</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e7%a7%91%e7%a0%94">科研</a></li>
+			<li class="widget__item"><a class="widget__link" href="/categories/%e8%ae%b0%e5%bf%86%e5%a4%87%e4%bb%bd">记忆备份</a></li>
+		</ul>
+	</div>
+</div>
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/sineatos" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:sineatos@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>sineatos@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog" title="Blog">Blog (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;" title="C&#43;&#43;">C&#43;&#43; (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker" title="Docker">Docker (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/git" title="Git">Git (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang" title="Golang">Golang (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/golang%e5%bc%80%e6%ba%90%e5%ba%93" title="Golang开源库">Golang开源库 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo" title="Hugo">Hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java" title="Java">Java (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java%e5%91%bd%e4%bb%a4" title="Java命令">Java命令 (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jupyter" title="Jupyter">Jupyter (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux" title="Linux">Linux (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/maven" title="Maven">Maven (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/omnet&#43;&#43;" title="Omnet&#43;&#43;">Omnet&#43;&#43; (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python" title="Python">Python (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python%e6%a0%87%e5%87%86%e5%ba%93" title="Python标准库">Python标准库 (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tmux" title="Tmux">Tmux (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vim" title="Vim">Vim (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%8e%9f%e5%88%9b" title="原创">原创 (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7" title="开发工具">开发工具 (17)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae" title="开源项目">开源项目 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%9c%8d%e5%8a%a1%e5%99%a8" title="服务器">服务器 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%e6%a0%87%e8%ae%b0%e8%af%ad%e8%a8%80" title="标记语言">标记语言 (1)</a>
+	</div>
+</div>
+</aside>
+	</div>
+		<footer class="footer">
+			<div class="container container-inner">
+				<div class="footer__copyright">&copy; 2018 Matrix. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span></div>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>
